@@ -3,19 +3,26 @@ const path = require("path");
 const app = express();
 const port = 3000;
 const publicFolderPath = path.join(__dirname, "/../", 'public');
-const chatKey = "123";
 
 var users = [];
 
+app.use(express.json());
 app.use(express.static(publicFolderPath));
 
 
-app.post("/login", function (req, res) {
-  console.log("logged in");
-
-  users.push();
+app.post("/login", function (req, res) { 
+  var user = req.body;
+  var key = "";
+  for(var i=0;i<8;i++){
+    key += String.fromCharCode(Math.floor(Math.random() * 26 + 65));
+  }
+  user.key = key;
   
-  res.send();
+  users.push(user);
+
+  console.log(users);
+  
+  res.send(chatKey);
 });
 
 app.post("/submit", function (req, res) {
