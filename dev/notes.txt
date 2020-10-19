@@ -1,0 +1,6 @@
+-username
++show how is on
++export chat
+-message: text, username, date
++message iterception (front- & backend)
+-save to text-document
