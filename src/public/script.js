@@ -1,44 +1,36 @@
-let userProfile = {};
+let user;
 
-function joinConversation() {
-    let username = document.getElementById("username").value;
+let frame;
 
-    let joinRequest = new XMLHttpRequest();
-    joinRequest.open('POST', "/login", true);
-    joinRequest.setRequestHeader('Content-Type', 'application/json');
+window.onload = function () {
+    user = null;
 
-    joinRequest.onload = function () { 
-        chatKey = joinRequest.responseText;
-        user.key = chatKey;
-    };
-
-    joinRequest.onerror = function () {
-        return;
-    };
-
-    joinRequest.send(JSON.stringify({
-        "username": username
-    }));
+    frame = 0;
+    loop();
 }
 
-function sendMessage(){
-    let message = {
-        username: userProfile.username,
-        key: userProfile.key,
-        message: "test Message!"
-    };
-    let messageRequest = new XMLHttpRequest();
-    messageRequest.open('POST', "/submitMessage", true);
-    messageRequest.setRequestHeader('Content-Type', 'application/json');
+function loop() {
 
-    messageRequest.onload = function () { 
-        chatKey = joinRequest.responseText;
-        user.key = chatKey;
-    };
+    if (user !== null && frame % 120 === 0) {
+        var messages = user.getMessages();
+        //TODO: handle messages
+    }
 
-    messageRequest.onerror = function () {
-        return;
-    };
+    frame++;
+    requestAnimationFrame(loop);
+}
 
-    messageRequest.send(JSON.stringify(message));
+
+function join() {
+    let username = document.getElementById("username").value;
+    user = new ChatUser(username);
+}
+
+function sendMessage() {
+    let message = document.getElementById("message").value;
+    user.sendMessage(message);
+}
+
+function leave() {
+    user.leave();
 }
