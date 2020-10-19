@@ -4,3 +4,5 @@
 -message: text, username, date
 +message iterception (front- & backend)
 -save to text-document
++log out
++on tab close
