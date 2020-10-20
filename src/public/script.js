@@ -1,3 +1,4 @@
+//TODO: send refresh requests every 10sec even when window closed (-> web worker)
 let user;
 
 let frame;
@@ -11,6 +12,7 @@ window.onload = function () {
 
 function loop() {
 
+    //get chat every 120 frames = 2sec
     if (user !== null && frame % 120 === 0) {
         var messages = user.getMessages();
         //TODO: handle messages
@@ -21,9 +23,12 @@ function loop() {
 }
 
 
+
+/* FUNCTIONS CALLED BY USER (BUTTON) */
 function join() {
     let username = document.getElementById("username").value;
     user = new ChatUser(username);
+    //TODO: change appearance
 }
 
 function sendMessage() {
@@ -33,4 +38,5 @@ function sendMessage() {
 
 function leave() {
     user.leave();
+    //TODO: change appearance
 }
