@@ -14,8 +14,10 @@ function loop() {
 
     //get chat every 120 frames = 2sec
     if (user !== null && frame % 120 === 0) {
-        var messages = user.getMessages();
+        let messages = user.getMessages();
         //TODO: handle messages
+        let userList = user.getUsers();
+        //TODO: handle users
     }
 
     frame++;

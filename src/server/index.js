@@ -48,10 +48,17 @@ app.post("/sendMessage", function (req, res) {
   res.send("message sent");
 });
 
-
 app.post("/getMessages", function (req, res) {
   //TODO: check user
   res.send(fs.readFileSync(chatFilePath));
+});
+
+app.post("/getUsers", function (req, res) {
+  //TODO: check user
+  let userList = "";
+  //TODO: reformat userList
+
+  res.send(userList);
 });
 
 app.post("/leave", function (req, res) {

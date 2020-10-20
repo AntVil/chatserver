@@ -58,6 +58,13 @@ class ChatUser {
         return response;
     }
 
+    //method for receiving users (requires complete userProfile)
+    async getUsers() {
+        this.userProfile.message = "";
+        let response = await this.request("POST", "/getUsers", "Content-Type", "application/json", JSON.stringify(this.userProfile));
+        return response;
+    }
+
     //method for leaving the chatroom (requires complete userProfile)
     async leave() {
         this.userProfile.message = "";
