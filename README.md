@@ -7,5 +7,6 @@ TODO:
 -clientside stay logged in (public: script.js)
 -documentation (all)
 -testing/debugging (all)
+-discuss handeling messages transmition (how to transmit only relevant messages?)
 
 Check dev/diagrams to see the general structure
