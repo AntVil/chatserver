@@ -7,3 +7,5 @@ TODO:
 -clientside stay logged in (public: script.js)
 -documentation (all)
 -testing/debugging (all)
+
+Check dev/diagrams to see the general structure
