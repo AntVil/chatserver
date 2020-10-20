@@ -1,1 +1,5 @@
-some messages here! to test! wow!message 1message 2message 3
+#User1|00:00|some messages here!
+#User1|00:01|to test! wow!
+#User2|01:00|message 1
+message 2
+message 3
