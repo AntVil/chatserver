@@ -16,7 +16,8 @@ const chatFilePath = path.join(__dirname, "chat.txt");
 let users = [];
 
 
-//configuring Server
+
+/* CONFIGURATING SERVER */
 app.use(express.json());
 app.use(express.static(publicFolderPath));
 
@@ -60,7 +61,8 @@ app.post("/leave", function (req, res) {
 });
 
 
-//start Server
+
+/* START SERVER */
 app.listen(port, () => {
   console.log("serving on port: " + port);
 });
