@@ -25,9 +25,9 @@ app.use(express.static(publicFolderPath));
 
 /* HANDELING REQUESTS */
 app.post("/join", function (req, res) {
-  var userProfile = req.body;
-  var key = "";
-  for (var i = 0; i < 8; i++) {
+  let userProfile = req.body;
+  let key = "";
+  for (let i = 0; i < 8; i++) {
     key += String.fromCharCode(Math.floor(Math.random() * 26 + 65));
   }
   userProfile.key = key;
@@ -39,11 +39,11 @@ app.post("/join", function (req, res) {
 });
 
 app.post("/sendMessage", function (req, res) {
-  var userProfile = req.body;
-
+  let userProfile = req.body;
   //TODO: check user
+  let message = userProfile.message;
   //TODO: reformat message
-  fs.appendFileSync(chatFilePath, userProfile.message);
+  fs.appendFileSync(chatFilePath, message);
 
   res.send("message sent");
 });
