@@ -1,0 +1,10 @@
+#presentation infp: 
+-10-15min
+-20% of grade
+-chat (frontend + backend)
+
+#design choices:
+-
+
+#problems:
+-
