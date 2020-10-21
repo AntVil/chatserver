@@ -10,4 +10,5 @@
 - discuss handeling messages transmition (how to transmit only relevant messages?)
 
 ###### Check dev/diagrams to see the general structure
+###### Update dev/presentation to keep track of progress and decisions
 ###### (this document uses https://guides.github.com/features/mastering-markdown/)
