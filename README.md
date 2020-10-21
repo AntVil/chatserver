@@ -1,12 +1,13 @@
 # chatserver
-a simple chat server
+### a simple chat server
 
-TODO:
--handel serverside testing (server: index.js)
--design/data presentation clientside (public: index.html & style.css)
--clientside stay logged in (public: script.js)
--documentation (all)
--testing/debugging (all)
--discuss handeling messages transmition (how to transmit only relevant messages?)
+##### TODO:
+- handel serverside testing (server: index.js)
+- design/data presentation clientside (public: index.html & style.css)
+- clientside stay logged in (public: script.js)
+- documentation (all)
+- testing/debugging (all)
+- discuss handeling messages transmition (how to transmit only relevant messages?)
 
-Check dev/diagrams to see the general structure
+###### Check dev/diagrams to see the general structure
+###### (this document uses https://guides.github.com/features/mastering-markdown/)
