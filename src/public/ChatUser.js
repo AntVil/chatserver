@@ -8,6 +8,8 @@ class ChatUser {
             message: ""
         };
 
+        this.clientHeartBeat = 10000;
+
         this.join();
     }
 
@@ -69,5 +71,11 @@ class ChatUser {
     async leave() {
         this.userProfile.message = "";
         let response = await this.request("POST", "/leave", "Content-Type", "application/json", JSON.stringify(this.userProfile));
+    }
+
+    //method for refreshing connection (needs to be called every 'this.clientHeartBeat' ms to stay logged in)
+    async refresh() {
+        this.userProfile.message = "";
+        let response = await this.request("POST", "/refresh", "Content-Type", "application/json", JSON.stringify(this.userProfile));
     }
 }

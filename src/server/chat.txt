@@ -1,5 +1,4 @@
-#User1|00:00|some messages here!
-#User1|00:01|to test! wow!
-#User2|01:00|message 1
-message 2
-message 3
+#User1|11:19|some Message&excl;
+#User1|11:19|new Message&excl;
+#User2|11:19|problematic Message:
+#User3|11:20|&lt;script&gt;

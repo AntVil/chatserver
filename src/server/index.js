@@ -7,6 +7,9 @@ const app = express();
 
 //serve webpage on port
 const port = 3000;
+//used to kick offline users
+const serverHeartBeat = 20000;
+const clientHeartBeat = 10000;
 
 //filepaths
 const publicFolderPath = path.join(__dirname, "/../", 'public');
@@ -24,6 +27,7 @@ app.use(express.static(publicFolderPath));
 
 
 /* HANDELING REQUESTS */
+//this function allows users to join the chat
 app.post("/join", function (req, res) {
   let userProfile = req.body;
 
@@ -46,22 +50,27 @@ app.post("/join", function (req, res) {
   res.send(key);
 });
 
-
+//this function accepts messages and adds them to the chat
 app.post("/sendMessage", function (req, res) {
   let userProfile = req.body;
   let userIndex = getUserIndex(userProfile);
   if(userIndex == -1){
     res.status(404).send("access denied");
   }else{
-    let message = "#" + users[userIndex].username + "|" + Date.now() + "|" + users[userIndex].message;
+    let message = replaceToHTMLString(userProfile.message);
     
-    fs.appendFileSync(chatFilePath, message);
+    let date = new Date();
+    let time = date.getHours() + ":" + date.getMinutes();
+    let storedMessage = "#" + userProfile.username + "|" + time + "|" + message + "\n";
+    
+    fs.appendFileSync(chatFilePath, storedMessage);
 
     res.send("message sent");
   }
 });
 
-
+//this function sends the current chat
+//TODO: only send relevant messages
 app.post("/getMessages", function (req, res) {
   let userProfile = req.body;
   let userIndex = getUserIndex(userProfile);
@@ -72,8 +81,9 @@ app.post("/getMessages", function (req, res) {
   }
 });
 
-
+//this function returns the list of currently online users
 app.post("/getUsers", function (req, res) {
+  let userProfile = req.body;
   let userIndex = getUserIndex(userProfile);
   if(userIndex == -1){
     res.status(404).send("access denied");
@@ -86,7 +96,7 @@ app.post("/getUsers", function (req, res) {
   }
 });
 
-
+//this function unregisters a user
 app.post("/leave", function (req, res) {
   let userProfile = req.body;
   
@@ -101,7 +111,9 @@ app.post("/leave", function (req, res) {
 });
 
 
+//this function refreshes the timeStamp which is used to determine if a user should be kicked
 app.post("/refresh", function(req, res) {
+  let userProfile = req.body;
   let userIndex = getUserIndex(userProfile);
   if(userIndex == -1){
     res.status(404).send("user not found");
@@ -113,12 +125,10 @@ app.post("/refresh", function(req, res) {
 });
 
 
-
+//this function kicks users who were not online for a while
 function kick(){
-  //TODO: check 'timeStamp' of users
-  //TODO: unregister user
   for(let i=users.length-1;i>=0;i--){
-    if(Date.now() - users[i].timeStamp > 10000){
+    if(Date.now() - users[i].timeStamp > clientHeartBeat){
       users.splice(i, 1);
     }
   }
@@ -126,7 +136,7 @@ function kick(){
 
 
 
-/* HILFSFUNKTIONEN */
+/* HELPERFUNCTIONS */
 function getUserIndex(userProfile){
   let userIndex = -1;
   for(let i=0;i<users.length;i++){
@@ -138,9 +148,38 @@ function getUserIndex(userProfile){
   return userIndex;
 }
 
+function replaceToHTMLString(str){
+  let result = "";
+  for(let i=0;i<str.length;i++){
+    result += replaceToHTMLChar(str[i]);
+  }
+  return result;
+}
+
+function replaceToHTMLChar(char){
+  let specialChars = ["&", "<", ">", "#", "|", '"', "'", "´", "!"];
+  let specialCharDict = {
+    "&": "&amp",
+    "<": "&lt;",
+    ">": "&gt;",
+    "#": "&num;",
+    "|": "&vert;",
+    '"': "&quot",
+    "'": "&apos;",
+    "´": "&acute;",
+    "!": "&excl;"
+  }
+  if(specialChars.includes(char)){
+    return specialCharDict[char];
+  }else{
+    return char;
+  }
+}
+
 
 /* START SERVER */
 app.listen(port, () => {
   console.log("serving on port: " + port);
-  setInterval(kick, 20000);
+  console.log("kicking users every " + serverHeartBeat + "ms, who were not online for " + clientHeartBeat + "ms");
+  setInterval(kick, serverHeartBeat);
 });

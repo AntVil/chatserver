@@ -40,5 +40,6 @@ function sendMessage() {
 
 function leave() {
     user.leave();
+    user = null;
     //TODO: change appearance
 }
