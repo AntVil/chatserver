@@ -1,0 +1,19 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#login-screen{
+    padding: 10em;
+}
+#chat-sreen{
+    padding: 10em;
+}
+/*  notes/Ideas:
+
+    -first, only login srcreen shows
+        -Picture, logo, top&sides
+        -username &join middle bottom
+    -chat screen shows after login
+        -slide in, graphics (logo) sweep to a different location on screen an change their size to accomodate the chat window
+        -button animations
+        -text bubble (bubbly motions when received/sent)
+*/
