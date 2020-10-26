@@ -1,5 +1,9 @@
+"-" -> essential
+"+" -> additional
+
 -username
 +show who is online
++show who is typing
 +export chat
 -message: text, username, date
 +message iterception (front- & backend)
