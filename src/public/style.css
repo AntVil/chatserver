@@ -1,19 +1,53 @@
+/*variables*/
+:root {
+    --backgroundColor: #EEEEEE;
+    --textColor: #000000;
+}
+
+/*preferences*/
+@media (prefers-color-scheme: dark) {
+    :root{
+        --backgroundColor: #333333;
+        --textColor: #FF9900;
+    }
+}
+
+
+/*global standart values*/
 *{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: var(--textColor);
 }
-#login-screen{
-    padding: 10em;
-}
-#chat-sreen{
-    padding: 10em;
-}
-/*  notes/Ideas:
 
-    -first, only login srcreen shows
-        -Picture, logo, top&sides
-        -username &join middle bottom
-    -chat screen shows after login
-        -slide in, graphics (logo) sweep to a different location on screen an change their size to accomodate the chat window
-        -button animations
-        -text bubble (bubbly motions when received/sent)
-*/
+
+#background{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--backgroundColor);
+}
+
+
+/*screens change appearance using javascript, when logged in*/
+#login-screen{
+    display: block;
+    padding: 10em;
+}
+
+#chat-screen{
+    display: none;
+    padding: 10em;
+}
+
+
+
+/*disable textare resizing*/
+#message{
+    resize: none;
+}
+
+
+/*notes for development have been moved to "dev/notes.txt" */

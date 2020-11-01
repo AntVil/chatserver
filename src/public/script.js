@@ -1,27 +1,58 @@
-//TODO: send refresh requests every 10sec even when window closed (-> web worker)
 let user;
+
+let loginScreenElement;
+let chatScreenElement;
+let usersElement;
+let messagesElement;
 
 let frame;
 
 window.onload = function () {
     user = null;
 
+    loginScreenElement = document.getElementById("login-screen");
+    chatScreenElement = document.getElementById("chat-screen");
+    usersElement = document.getElementById("users");
+    messagesElement = document.getElementById("messages");
+
     frame = 0;
     loop();
 }
 
-function loop() {
+async function loop() {
 
-    //get chat every 120 frames = 2sec
-    if (user !== null && frame % 120 === 0) {
-        let messages = user.getMessages();
-        //TODO: handle messages
-        let userList = user.getUsers();
-        //TODO: handle users
+    //get chat every 60 frames = 1sec
+    if (user !== null && frame % 60 === 0) {
+        let chat = await user.getMessages();
+        renderChat(chat);
+
+        let userList = await user.getUsers();
+        renderUsers(userList);
     }
 
     frame++;
     requestAnimationFrame(loop);
+}
+
+
+function renderChat(chat){
+    let messages = chat.split("#");
+    messagesElement.innerHTML = "";
+    for(let i=1;i<messages.length;i++){
+        let messageData = messages[i].split("|");
+        let name = messageData[0];
+        let time = messageData[1];
+        let message = messageData[2];
+        messagesElement.innerHTML += name + " " + time + "<br>" + message + "<br>";
+    }
+}
+
+function renderUsers(userList){
+    let users = userList.split("#");
+    usersElement.innerHTML = "";
+    for(let i=1;i<users.length;i++){
+        usersElement.innerHTML += users[i] + "<br>";
+    }
 }
 
 
@@ -30,7 +61,9 @@ function loop() {
 function join() {
     let username = document.getElementById("username").value;
     user = new ChatUser(username);
-    //TODO: change appearance
+
+    loginScreenElement.style.display = "none";
+    chatScreenElement.style.display = "block";
 }
 
 function sendMessage() {
@@ -41,5 +74,7 @@ function sendMessage() {
 function leave() {
     user.leave();
     user = null;
-    //TODO: change appearance
+    
+    loginScreenElement.style.display = "block";
+    chatScreenElement.style.display = "none";
 }

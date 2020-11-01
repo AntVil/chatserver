@@ -7,6 +7,7 @@
     <title>Chatserver</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
+    <link rel="icon" type="image/png" href="images/pageIcon.png">
     <link rel="stylesheet" href="style.css">
 
     <script type="text/javascript" src="ChatUser.js"></script>
@@ -14,6 +15,7 @@
 </head>
 
 <body>
+    <div id="background"></div>
 
     <div id="login-screen">
         <label for="username">Username: </label>
@@ -22,8 +24,14 @@
     </div>
 
     <div id="chat-screen">
-        <input id="message" type="text" placeholder="message" />
+        <div id="users"></div>
+        <br>
+        <div id="messages"></div>
+        <br>
+
+        <textarea id="message" type="text" placeholder="message"></textarea>
         <button onclick="sendMessage()">sendMessage</button>
+        <br>
         <button onclick="leave()">leave</button>
     </div>
 

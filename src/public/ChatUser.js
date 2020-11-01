@@ -8,8 +8,6 @@ class ChatUser {
             message: ""
         };
 
-        this.clientHeartBeat = 10000;
-
         this.join();
     }
 
@@ -43,13 +41,22 @@ class ChatUser {
     //method for joining the chatroom
     async join() {
         let response = await this.request("POST", "/join", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        this.userProfile.key = response;
+        if(response == "|username taken|"){
+            this.userProfile.username += "_";
+            this.join();
+        }else{
+            this.userProfile.key = response;
+        }
     }
 
     //method for sending a message (requires complete userProfile)
     async sendMessage(message) {
         this.userProfile.message = message;
         let response = await this.request("POST", "/sendMessage", "Content-Type", "application/json", JSON.stringify(this.userProfile));
+        if(response == "|user not found|"){
+            await this.join();
+            return this.sendMessage(message);
+        }
         return response;
     }
 
@@ -57,25 +64,29 @@ class ChatUser {
     async getMessages() {
         this.userProfile.message = "";
         let response = await this.request("POST", "/getMessages", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        return response;
+        if(response == "|user not found|"){
+            await this.join();
+            return this.getMessages();
+        }else{
+            return response;
+        }
     }
 
     //method for receiving users (requires complete userProfile)
     async getUsers() {
         this.userProfile.message = "";
         let response = await this.request("POST", "/getUsers", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        return response;
+        if(response == "|user not found|"){
+            await this.join();
+            return this.getUsers();
+        }else{
+            return response;
+        }
     }
 
     //method for leaving the chatroom (requires complete userProfile)
     async leave() {
         this.userProfile.message = "";
         let response = await this.request("POST", "/leave", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-    }
-
-    //method for refreshing connection (needs to be called every 'this.clientHeartBeat' ms to stay logged in)
-    async refresh() {
-        this.userProfile.message = "";
-        let response = await this.request("POST", "/refresh", "Content-Type", "application/json", JSON.stringify(this.userProfile));
     }
 }
