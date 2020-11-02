@@ -43,7 +43,18 @@ function renderChat(chat){
         let name = messageData[0];
         let time = messageData[1];
         let message = messageData[2];
-        messagesElement.innerHTML += "<div id='chat-message'>" + "<div id='chat-metadata'>" +name + " " + time + "</div>" + "<br>" + "<div id='chat-text'>" +message + "</div>" +"<br>" + "</div>";
+        messagesElement.innerHTML += `
+        <div class="chat-message">
+            <div class="chat-metadata">
+                <span class="chat-metadata-name">${name}</span>
+                <span class="chat-metadata-time">${time}</span>
+            </div>
+            <br>
+            <div class="chat-text">
+                ${message}
+            </div>
+        </div>
+        `;
     }
 }
 

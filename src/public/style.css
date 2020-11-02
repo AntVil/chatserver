@@ -1,94 +1,132 @@
 /*variables*/
 :root {
-    --backgroundColor: #EEEEEE;
+    --backgroundBackgroundColor: #EEEEEE;
     --textColor: #000000;
+    --login-screenBackgroundcolor: #999999;
+    --chat-messageBordercolor: #c0c0c0;
+    --chat-messageBackgroundcolor: #e1e1e1;
+    --chat-metadata-nameColor: #0099FF;
+    --chat-metadata-timeColor: #00AA00;
+    --chat-textColor: #333333;
+    --usersBordercolor: #c0c0c0;
+    --usersBackgroundcolor: #e1e1e1;
+    --messagesBordercolor: #c0c0c0;
+    --messagesBackgroundcolor: #e1e1e1;
+    --buttonBordercolor: #c0c0c0;
+    --buttonBackgroundcolor: #e1e1e1;
 }
 
 /*preferences*/
 @media (prefers-color-scheme: dark) {
-    :root{
-        --backgroundColor: #333333;
+    :root {
+        --backgroundBackgroundColor: #333333;
         --textColor: #FF9900;
+        --login-screenBackgroundcolor: #999999;
+        --chat-messageBordercolor: #c0c0c0;
+        --chat-messageBackgroundcolor: #e1e1e1;
+        --chat-metadata-nameColor: #000000;
+        --chat-metadata-timeColor: #000000;
+        --chat-textColor: #333333;
+        --usersBordercolor: #c0c0c0;
+        --usersBackgroundcolor: #e1e1e1;
+        --messagesBordercolor: #c0c0c0;
+        --messagesBackgroundcolor: #e1e1e1;
+        --buttonBordercolor: #c0c0c0;
+        --buttonBackgroundcolor: #e1e1e1;
     }
 }
 
-
-/*global standart values*/
-*{
+/*global standard values*/
+* {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: var(--textColor);
 }
 
-
-#background{
+#background {
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: var(--backgroundColor);
+    background-color: var(--backgroundBackgroundColor);
 }
-
 
 /*screens change appearance using javascript, when logged in*/
-#login-screen{
+
+#login-screen {
     display: block;
-    padding: 10em;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    background-color: var(--login-screenBackgroundcolor);
+    border-radius: 10px;
 }
 
-#chat-screen{
+#chat-screen {
     display: none;
     padding: 20em;
 }
 
-
-/*disable textare resizing*/
-#message{
-    resize: none;
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
+.chat-message {
+    border: 2px solid var(--chat-messageBordercolor);
+    color: var(--chat-messageColor);
+    background-color: var(--chat-messageBackgroundcolor);
     border-radius: 5px;
     padding: 10px;
     margin: 10px
 }
 
-#chat-message{
+.chat-metadata {}
+
+.chat-metadata-name {
+    color: var(--chat-metadata-nameColor);
+}
+
+.chat-metadata-time {
+    color: var(--chat-metadata-timeColor);
+}
+
+.chat-text {
+    color: var(--chat-textColor);
+}
+
+/*textarea for messages to be send*/
+
+#message {
+    /*disable textare resizing*/
     resize: none;
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px
-}
-#chat-metadata{
-   /* border: 2px solid #dedede;*/
-}
-#chat-text{
-   /* border: 2px solid #dedede;*/
-}
-#users{
-    resize: none;
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
     border-radius: 5px;
     padding: 10px;
     margin: 10px
 }
 
-#messages{
-resize: none;
-border: 2px solid #dedede;
-background-color: #f1f1f1;
-border-radius: 5px;
-padding: 10px;
-margin: 10px
+/*contains list of users*/
+
+#users {
+    border: 2px solid var(--usersBordercolor);
+    background-color: var(--usersBackgroundcolor);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px
+}
+
+/*contains list of messages*/
+
+#messages {
+    border: 2px solid var(--messagesBordercolor);
+    background-color: var(--messagesBackgroundcolor);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px
 }
 
 button {
-    resize: none;
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
+    border: 2px solid var(--buttonBordercolor);
+    color: var(--buttonColor);
+    background-color: var(--buttonBackgroundcolor);
     border-radius: 5px;
     padding: 10px;
     margin: 10px
