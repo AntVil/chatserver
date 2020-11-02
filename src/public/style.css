@@ -39,15 +39,59 @@
 
 #chat-screen{
     display: none;
-    padding: 10em;
+    padding: 20em;
 }
-
 
 
 /*disable textare resizing*/
 #message{
     resize: none;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px
 }
 
+#chat-message{
+    resize: none;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px
+}
+#chat-metadata{
+   /* border: 2px solid #dedede;*/
+}
+#chat-text{
+   /* border: 2px solid #dedede;*/
+}
+#users{
+    resize: none;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px
+}
+
+#messages{
+resize: none;
+border: 2px solid #dedede;
+background-color: #f1f1f1;
+border-radius: 5px;
+padding: 10px;
+margin: 10px
+}
+
+button {
+    resize: none;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px
+}
 
 /*notes for development have been moved to "dev/notes.txt" */
