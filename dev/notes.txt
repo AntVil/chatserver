@@ -1,16 +1,20 @@
 "-" -> essential
 "+" -> additional
+"#" -> implemented/fixed
+":" -> scraped/fixed
 
--username
-+show who is online
+#username
+#show who is online
 +show who is typing
 +export chat
--message: text, username, date
-+message iterception (front- & backend)
+#message: text, username, date
+#message iterception (front- & backend)
 -save to text-document
-+log out
-+on tab close #unreliable
-+constant refresh requests (web worker)
+#log out
+#on tab close -> unreliable
+:constant refresh requests (web worker)
++support special characters
++support other forms of data (images, video, ...)
 
 
 /*  notes/Ideas:
