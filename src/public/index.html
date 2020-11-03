@@ -26,14 +26,25 @@
     <div id="chat-screen">
         <div id="users"></div>
         <br>
-        <div id="messages"></div>
-        <br>
-
-        <textarea id="message" type="text" placeholder="message"></textarea>
-        <button onclick="sendMessage()">sendMessage</button>
-        <br>
-        <button onclick="leave()">leave</button>
-    </div>
+        <div id="chat-box">
+            <div id="messages"></div>
+            <br>
+        </div>
+        <div id="chat-input">
+            <textarea id="message" type="text" placeholder="message" rows="4" cols="100"></textarea>
+            <br>
+            <div id="chat-util">
+                <button onclick="sendMessage()">sendMessage</button>
+                <button onclick="leave()">leave</button>
+                <div>
+                    <form>
+                        <input type="checkbox" name="autoScroll" id="autoScroll" checked>
+                        <label>autoScroll</label>
+                    </form>
+                </div>
+                <br>
+            </div>
+        </div>
 
 </body>
 

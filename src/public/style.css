@@ -67,7 +67,14 @@
 
 #chat-screen {
     display: none;
-    padding: 20em;
+    padding: 5em;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    height: 720px;
+    width: 1280px;
+    
 }
 
 .chat-message {
@@ -79,7 +86,9 @@
     margin: 10px
 }
 
-.chat-metadata {}
+.chat-metadata {
+
+}
 
 .chat-metadata-name {
     color: var(--chat-metadata-nameColor);
@@ -132,4 +141,13 @@ button {
     margin: 10px
 }
 
+
+#chat-box{
+    height: 500px;
+    overflow: auto;
+}
+
+#chat-util{
+display: flex;
+}
 /*notes for development have been moved to "dev/notes.txt" */

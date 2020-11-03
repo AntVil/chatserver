@@ -4,6 +4,7 @@ let loginScreenElement;
 let chatScreenElement;
 let usersElement;
 let messagesElement;
+let chatBoxElemt;
 
 let frame;
 
@@ -14,7 +15,7 @@ window.onload = function () {
     chatScreenElement = document.getElementById("chat-screen");
     usersElement = document.getElementById("users");
     messagesElement = document.getElementById("messages");
-
+    chatBoxElemt = document.getElementById("chat-box");
     frame = 0;
     loop();
 }
@@ -35,10 +36,10 @@ async function loop() {
 }
 
 
-function renderChat(chat){
+function renderChat(chat) {
     let messages = chat.split("#");
     messagesElement.innerHTML = "";
-    for(let i=1;i<messages.length;i++){
+    for (let i = 1; i < messages.length; i++) {
         let messageData = messages[i].split("|");
         let name = messageData[0];
         let time = messageData[1];
@@ -56,12 +57,15 @@ function renderChat(chat){
         </div>
         `;
     }
+if(document.getElementById('autoScroll').checked){
+    chatBoxElemt.scrollTop = chatBoxElemt.scrollHeight;
+}
 }
 
-function renderUsers(userList){
+function renderUsers(userList) {
     let users = userList.split("#");
     usersElement.innerHTML = "";
-    for(let i=1;i<users.length;i++){
+    for (let i = 1; i < users.length; i++) {
         usersElement.innerHTML += users[i] + "<br>";
     }
 }
@@ -85,7 +89,7 @@ function sendMessage() {
 function leave() {
     user.leave();
     user = null;
-    
+
     loginScreenElement.style.display = "block";
     chatScreenElement.style.display = "none";
 }
