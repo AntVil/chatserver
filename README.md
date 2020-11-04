@@ -3,11 +3,14 @@
 
 ##### TODO:
 - handel serverside testing (server: index.js)
-- design/data presentation clientside (public: index.html & style.css & script.js & images/pageIcon.png)
+- ##### design/data presentation clientside (public: index.html & style.css & script.js & images/pageIcon.png)
+    > only update chat when changed
 - documentation (all)
+    > update diagrams (dev/presentation/diagrams/)
 - testing/debugging (all)
 - discuss handeling messages transmition (how to transmit only relevant messages?)
 - feature list, design choices (dev/presentation: notes)
+    > more features
 
 ##### HOW TO START THE SERVER (using VSCode):
 - copy the repository to your computer

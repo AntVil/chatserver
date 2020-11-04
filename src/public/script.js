@@ -4,7 +4,8 @@ let loginScreenElement;
 let chatScreenElement;
 let usersElement;
 let messagesElement;
-let chatBoxElemt;
+let chatBoxElement;
+let chatAutoScrollCheckbox;
 
 let frame;
 
@@ -15,7 +16,9 @@ window.onload = function () {
     chatScreenElement = document.getElementById("chat-screen");
     usersElement = document.getElementById("users");
     messagesElement = document.getElementById("messages");
-    chatBoxElemt = document.getElementById("chat-box");
+    chatBoxElement = document.getElementById("chat-box");
+    chatAutoScrollCheckbox = document.getElementById("chat-autoScroll");
+
     frame = 0;
     loop();
 }
@@ -30,6 +33,9 @@ async function loop() {
         let userList = await user.getUsers();
         renderUsers(userList);
     }
+
+    //scroll text all the time
+    scrollText();
 
     frame++;
     requestAnimationFrame(loop);
@@ -57,9 +63,6 @@ function renderChat(chat) {
         </div>
         `;
     }
-if(document.getElementById('autoScroll').checked){
-    chatBoxElemt.scrollTop = chatBoxElemt.scrollHeight;
-}
 }
 
 function renderUsers(userList) {
@@ -67,6 +70,12 @@ function renderUsers(userList) {
     usersElement.innerHTML = "";
     for (let i = 1; i < users.length; i++) {
         usersElement.innerHTML += users[i] + "<br>";
+    }
+}
+
+function scrollText(){
+    if(chatAutoScrollCheckbox.checked){
+        chatBoxElement.scrollTop = chatBoxElement.scrollHeight;
     }
 }
 
