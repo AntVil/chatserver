@@ -1,8 +1,9 @@
 /*variables*/
+
 :root {
-    --backgroundBackgroundColor: #EEEEEE;
+    --backgroundBackgroundColor: #ffffff00;
     --textColor: #000000;
-    --login-screenBackgroundcolor: #999999;
+    --login-screenBackgroundcolor: #4b4b4ba4;
     --chat-messageBordercolor: #c0c0c0;
     --chat-messageBackgroundcolor: #e1e1e1;
     --chat-metadata-nameColor: #0099FF;
@@ -13,14 +14,17 @@
     --messagesBackgroundcolor: #e1e1e1;
     --buttonBordercolor: #c0c0c0;
     --buttonBackgroundcolor: #e1e1e1;
+    --accent-color: rgba(170, 211, 224, 0.959);
 }
 
+
 /*preferences*/
+
 @media (prefers-color-scheme: dark) {
-    :root {
-        --backgroundBackgroundColor: #333333;
-        --textColor: #FF9900;
-        --login-screenBackgroundcolor: #999999;
+     :root {
+        --backgroundBackgroundColor: #000000;
+        --textColor: #ffffff;
+        --login-screenBackgroundcolor: #101dcf52;
         --chat-messageBordercolor: #c0c0c0;
         --chat-messageBackgroundcolor: #e1e1e1;
         --chat-metadata-nameColor: #9900FF;
@@ -30,13 +34,15 @@
         --usersBackgroundcolor: #e1e1e1;
         --messagesBackgroundcolor: #e1e1e1;
         --buttonBordercolor: #c0c0c0;
-        --buttonBackgroundcolor: #e1e1e1;
+        --buttonBackgroundcolor: #000000;
     }
 }
 
+
 /*global standard values*/
+
 * {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Arial, Geneva, Tahoma, sans-serif;
     color: var(--textColor);
 }
 
@@ -48,7 +54,18 @@
     height: 100%;
     z-index: -1;
     background-color: var(--backgroundBackgroundColor);
+    background-image: url(./images/Bubbles.png);
 }
+
+
+/*background-style for chat-sreen*/
+
+#background :hover {
+    transition: 2s ease-in-out;
+    background-size: 15%;
+    background-repeat: no-repeat;
+}
+
 
 /*screens change appearance using javascript, when logged in*/
 
@@ -57,10 +74,66 @@
     position: fixed;
     left: 50%;
     top: 50%;
+    width: 45%;
     transform: translate(-50%, -50%);
-    padding: 10px;
+    padding: 35px;
+    text-align: center;
+    font-size: large;
+}
+
+#login-screen #about {
+    display: none;
+    width: 55%;
+    margin: auto;
+    transform: translateY(-45%);
+    border-width: 1px;
+    border-style: solid;
+    border-image: linear-gradient( to bottom, var(--textColor), rgba(0, 0, 0, 0)) 0% 10;
+    font-size: small;
+}
+
+#login-screen #login-window {
     background-color: var(--login-screenBackgroundcolor);
     border-radius: 10px;
+    padding: 15px;
+}
+
+#login-screen label {
+    display: none;
+}
+
+#login-screen input {
+    transition: 0.8s ease;
+    width: 15%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    text-align: inherit;
+}
+
+#login-screen input:hover {
+    transition: 0.6s ease;
+    width: 30%;
+}
+
+#login-screen input:focus {
+    width: 30%;
+    color: var(--chat-textColor);
+}
+
+#login-screen button {
+    transition: 0.3s ease;
+    padding: 12px;
+    width: 75%;
+    color: white;
+    background-color: var(--textColor);
+    font-weight: bold;
+}
+
+#login-screen button:hover {
+    transition: 0.5s ease;
+    background-color: var(--accent-color);
+    cursor: pointer;
 }
 
 #chat-screen {
@@ -72,7 +145,6 @@
     top: 50%;
     height: 720px;
     width: 1280px;
-    
 }
 
 .chat-message {
@@ -100,6 +172,7 @@
     color: var(--chat-textColor);
 }
 
+
 /*textarea for messages to be send*/
 
 #message {
@@ -111,6 +184,7 @@
     margin: 10px;
 }
 
+
 /*contains list of users*/
 
 #users {
@@ -120,6 +194,7 @@
     padding: 10px;
     margin: 10px
 }
+
 
 /*contains list of messages*/
 
@@ -138,17 +213,17 @@ button {
     margin: 10px
 }
 
-
-#chat-box{
+#chat-box {
     height: 500px;
     overflow: auto;
     background-color: var(--chat-messageBackgroundcolor);
-    
     padding: 10px;
     margin: 10px
 }
 
-#chat-util{
+#chat-util {
     display: flex;
 }
+
+
 /*notes for development have been moved to "dev/notes.txt" */

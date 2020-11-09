@@ -15,12 +15,32 @@
 </head>
 
 <body>
-    <div id="background"></div>
+    <div id="background">
+        <img src="images/Logo.png" alt="message icon logo">
+    </div>
+
 
     <div id="login-screen">
-        <label for="username">Username: </label>
-        <input id="username" name="username" placeholder="username" />
-        <button onclick="join()">join</button>
+        <!-- maybe add "about" section, currently display: none, 
+        toggle maybe -->
+        <div id="about">
+            <p>
+                Welcome to the Web-Engineering-Project Chatserver made by
+                <br> Anton Böhler, Jan Broer and Alexander Dietrich.
+                <br><br>
+            </p>
+        </div>
+        <div id="login-window">
+            <!-- Label not necessary -->
+            <label for="username">Username: </label>
+            <input id="username" name="username" placeholder="Username" />
+            <div>
+                <button onclick="join()">join</button>
+            </div>
+        </div>
+
+
+
     </div>
 
     <div id="chat-screen">

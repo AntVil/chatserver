@@ -28,3 +28,8 @@
         -button animations
         -text bubble (bubbly motions when received/sent)
 */
+
+Additions/fixes: 
+    - display not only time, but also date of the message
+    - Autoscroll: disable automatically when manual scrolling 
+    - login by pressing enter after name input

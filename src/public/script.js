@@ -6,10 +6,11 @@ let usersElement;
 let messagesElement;
 let chatBoxElement;
 let chatAutoScrollCheckbox;
+let backgroundElement; //background animation in chat-screen
 
 let frame;
 
-window.onload = function () {
+window.onload = function() {
     user = null;
 
     loginScreenElement = document.getElementById("login-screen");
@@ -18,6 +19,7 @@ window.onload = function () {
     messagesElement = document.getElementById("messages");
     chatBoxElement = document.getElementById("chat-box");
     chatAutoScrollCheckbox = document.getElementById("chat-autoScroll");
+    backgroundElement = document.getElementById("background");
 
     frame = 0;
     loop();
@@ -73,8 +75,18 @@ function renderUsers(userList) {
     }
 }
 
-function scrollText(){
-    if(chatAutoScrollCheckbox.checked){
+function scrollText() {
+    /* Tried to make autoscroll only if there is no manual scrolling happening, no sucess yet.
+
+    let lastScroll = 0;
+    let down = false;
+    chatBoxElement.on("scroll", function(e) {
+        let scroll = this.scrollHeight;
+        down = scroll > lastScroll;
+        lastScroll = scroll;
+    });
+    */
+    if (chatAutoScrollCheckbox.checked /*&& down*/ ) {
         chatBoxElement.scrollTop = chatBoxElement.scrollHeight;
     }
 }
