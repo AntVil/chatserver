@@ -5,6 +5,7 @@ const path = require("path");
 const fs = require("fs");
 const app = express();
 
+
 //serve webpage on port
 const port = 3000;
 //used to kick offline users
@@ -18,7 +19,8 @@ const chatFilePath = path.join(__dirname, "chat.txt");
 //keeping track of online users
 let users = [];
 
-
+//chathistory
+let chatHistory;
 
 /* CONFIGURATING SERVER */
 app.use(express.json());
@@ -63,21 +65,51 @@ app.post("/sendMessage", function (req, res) {
     res.send("|user not found|");
   } else {
     setTimeStamp(userIndex);
-    
+
     let message = replaceToHTMLString(userProfile.message);
-    if(message.length === 0){
+    if (message.length === 0) {
       res.send("message invalid (empty)");
-    }else{
+    } else {
       let time = getTime();
       let storedMessage = "#" + userProfile.username + "|" + time + "|" + message + "\n";
-  
+
       fs.appendFileSync(chatFilePath, storedMessage);
-  
+      maxChatHistory();
       res.send("message sent");
     }
   }
 });
 
+//this function counts all lines in chat.txt und deletes the first row in chat.txt file
+function maxChatHistory() {
+  chatHistory = fs.readFileSync(chatFilePath, "utf-8");
+  console.log(chatHistory);
+  let count = 0;
+  for (let i = 0; i < chatHistory.length; i++) {
+    if (chatHistory[i] === "\n") {
+      count++;
+    }
+  }
+  console.log(count);
+  if(count >= 10){
+  const removeLines = (data, lines = []) => {
+    return data
+      .split('\n')
+      .filter((val, idx) => lines.indexOf(idx) === -1)
+      .join('\n');
+  }
+
+  fs.readFile(chatFilePath, 'utf8', (err, data) => {
+    if (err) throw err;
+
+    // remove the first line and the 5th and 6th lines in the file
+    fs.writeFile(chatFilePath, removeLines(data, [0]), 'utf8', function (err) {
+      if (err) throw err;
+      console.log("the lines have been removed.");
+    });
+  })
+}
+}
 
 //this function sends the current chat
 //TODO: only send relevant messages
@@ -180,19 +212,19 @@ function replaceToHTMLChar(char) {
   }
 }
 
-function setTimeStamp(userIndex){
+function setTimeStamp(userIndex) {
   users[userIndex].timeStamp = Date.now();
 }
 
 
-function getTime(){
+function getTime() {
   let date = new Date();
   let hours = date.getHours().toString();
   let minutes = date.getMinutes().toString();
-  if(hours.length == 1){
+  if (hours.length == 1) {
     hours = "0" + hours;
   }
-  if(minutes.length == 1){
+  if (minutes.length == 1) {
     minutes = "0" + minutes;
   }
   return hours + ":" + minutes;
