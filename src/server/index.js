@@ -74,41 +74,31 @@ app.post("/sendMessage", function (req, res) {
       let storedMessage = "#" + userProfile.username + "|" + time + "|" + message + "\n";
 
       fs.appendFileSync(chatFilePath, storedMessage);
-      maxChatHistory();
+
+      maxChatHistory(10);
+
       res.send("message sent");
     }
   }
 });
 
-//this function counts all lines in chat.txt und deletes the first row in chat.txt file
-function maxChatHistory() {
-  chatHistory = fs.readFileSync(chatFilePath, "utf-8");
-  console.log(chatHistory);
-  let count = 0;
-  for (let i = 0; i < chatHistory.length; i++) {
-    if (chatHistory[i] === "\n") {
-      count++;
+//this function restricts the size of the chatFile and removes old messages if neccecary
+function maxChatHistory(maxLineBreakCount) {
+  let chatHistory = fs.readFileSync(chatFilePath, "utf-8");
+  let lineBreakCount = 0;
+  let indexOfAcceptableLineBreak = 0;
+  for(let i=chatHistory.length-1;i>=0;i--){
+    let character = chatHistory.charAt(i);
+    if(character === "\n"){
+      lineBreakCount++;
+      if(lineBreakCount >= maxLineBreakCount){
+        indexOfAcceptableLineBreak = i;
+        break;
+      }
     }
   }
-  console.log(count);
-  if(count >= 10){
-  const removeLines = (data, lines = []) => {
-    return data
-      .split('\n')
-      .filter((val, idx) => lines.indexOf(idx) === -1)
-      .join('\n');
-  }
-
-  fs.readFile(chatFilePath, 'utf8', (err, data) => {
-    if (err) throw err;
-
-    // remove the first line and the 5th and 6th lines in the file
-    fs.writeFile(chatFilePath, removeLines(data, [0]), 'utf8', function (err) {
-      if (err) throw err;
-      console.log("the lines have been removed.");
-    });
-  })
-}
+  let newChatHistory = chatHistory.slice(indexOfAcceptableLineBreak, chatHistory.length-1).trim() + "\n";
+  fs.writeFileSync(chatFilePath, newChatHistory);
 }
 
 //this function sends the current chat

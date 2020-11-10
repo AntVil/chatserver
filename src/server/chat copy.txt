@@ -1,7 +1,0 @@
-#User1|11:19|some Message&excl;
-#User1|11:19|new Message&excl;
-#User2|11:19|problematic Message:
-#User3|11:20|&lt;script&gt;
-#123|15:47|Hello<br>World&excl;&excl;
-#Alex|11:31|Hey<br>
-
