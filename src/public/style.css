@@ -5,6 +5,7 @@
     --textColor: #000000;
     --login-screenBackgroundcolor: #4b4b4ba4;
     --chat-messageBordercolor: #c0c0c0;
+    --chat-boxBackgroundcolor: #ffffff00;
     --chat-messageBackgroundcolor: #ffffff;
     --chat-metadata-nameColor: #0099FF;
     --chat-metadata-timeColor: #00AA00;
@@ -25,11 +26,11 @@
         --backgroundBackgroundColor: #000000;
         --textColor: #ffffff;
         --login-screenBackgroundcolor: #101dcf52;
-        --chat-messageBordercolor: #c0c0c0;
-        --chat-messageBackgroundcolor: #00000085;
-        --chat-metadata-nameColor: #9900FF;
-        --chat-metadata-timeColor: #AA7700;
-        --chat-textColor: #333333;
+        --chat-messageBordercolor: #06149477;
+        --chat-messageBackgroundcolor: #3f3f3f;
+        --chat-metadata-nameColor: #0084ff;
+        --chat-metadata-timeColor: #a7a7a786;
+        --chat-textColor: #919191;
         --usersBordercolor: #c0c0c0;
         --usersBackgroundcolor: #e1e1e1;
         --buttonBordercolor: #c0c0c0;
@@ -173,7 +174,6 @@
 
 #column1users {
     display: block;
-    border: red solid;
 }
 
 
@@ -189,13 +189,13 @@
 
 #column2chat {
     display: block;
-    border: red solid;
 }
 
 #chat-box {
-    height: 500px;
+    position: relative;
+    height: 85%;
     overflow: auto;
-    background-color: var(--chat-messageBackgroundcolor);
+    background-color: var(--chat-boxBackgroundcolor);
     padding: 10px;
     margin: 10px
 }
@@ -224,7 +224,8 @@
     background-color: var(--chat-messageBackgroundcolor);
     border-radius: 5px;
     padding: 10px;
-    margin: 10px
+    margin: 10px;
+    width: 75%;
 }
 
 .chat-metadata {
@@ -244,6 +245,7 @@
 }
 
 button {
+    transition: 0.25s ease-in-out;
     border: 2px solid var(--buttonBordercolor);
     color: var(--buttonColor);
     background-color: var(--buttonBackgroundcolor);
@@ -252,13 +254,16 @@ button {
     margin: 10px
 }
 
+button:hover {
+    background-color: var(--accent-color);
+}
+
 #chat-util {
     display: flex;
 }
 
 #column3iframes {
     display: block;
-    border: red solid;
 }
 
 
