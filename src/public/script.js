@@ -91,6 +91,11 @@ function scrollText() {
     }
 }
 
+//does not work currently, background image jumps without 2s transition
+function backgroundAnimation() {
+    backgroundElement.style.transition = "background-image 2s";
+    backgroundElement.style.backgroundSize = "15%";
+}
 
 
 /* FUNCTIONS CALLED BY USER (BUTTON) */
@@ -99,7 +104,9 @@ function join() {
     user = new ChatUser(username);
 
     loginScreenElement.style.display = "none";
-    chatScreenElement.style.display = "block";
+    chatScreenElement.style.display = "flex";
+
+    backgroundAnimation();
 }
 
 function sendMessage() {

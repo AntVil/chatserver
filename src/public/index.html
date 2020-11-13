@@ -16,7 +16,11 @@
 
 <body>
     <div id="background">
-        <img src="images/Logo.png" alt="message icon logo">
+        <div id="logoHeader">
+            <img src="images/Logo.png" alt="message icon logo" id="logoImg">
+            <p id="logoTxt"> //Chat.server</p>
+        </div>
+
     </div>
 
 
@@ -44,24 +48,31 @@
     </div>
 
     <div id="chat-screen">
-        <div id="users"></div>
+        <section id="column1users">
+            <div id="users"></div>
+        </section>
 
-        <br>
 
-        <div id="chat-box">
-            <div id="messages"></div>
-            <br>
-        </div>
-
-        <div id="chat-input">
-            <textarea id="message" type="text" placeholder="message" rows="4" cols="100"></textarea>
-            <div id="chat-util">
-                <button onclick="sendMessage()">sendMessage</button>
-                <button onclick="leave()">leave</button>
-                <label for="chat-autoScroll">autoScroll</label>
-                <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
+        <section id="column2chat">
+            <div id="chat-box">
+                <div id="messages"></div>
             </div>
-        </div>
+
+            <div id="chat-input">
+                <textarea id="message" type="text" placeholder="message" rows="4" cols="100"></textarea>
+                <div id="chat-util">
+                    <button onclick="sendMessage()">sendMessage</button>
+                    <button onclick="leave()">leave</button>
+                    <label for="chat-autoScroll">autoScroll</label>
+                    <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
+                </div>
+            </div>
+        </section>
+
+        <section id="column3iframes">
+
+        </section>
+    </div>
 
 </body>
 
