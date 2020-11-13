@@ -267,4 +267,8 @@ button:hover {
 }
 
 
-/*notes for development have been moved to "dev/notes.txt" */
+
+
+#about{
+    display: none;
+}
