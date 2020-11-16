@@ -169,7 +169,6 @@
     top: 50%;
     height: 720px;
     width: 1280px;*/
-    border: blue solid;
 }
 
 #column1users {
@@ -225,7 +224,6 @@
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
-    width: 75%;
 }
 
 .chat-metadata {
@@ -266,9 +264,6 @@ button:hover {
     display: block;
 }
 
-
-
-
-#about{
+#about {
     display: none;
 }
