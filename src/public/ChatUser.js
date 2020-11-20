@@ -1,92 +1,68 @@
-//A class for handeling client->server interactions
+const CHAT_USER_MESSAGES_SYMBOL = Symbol("messages");
+const CHAT_USER_USERS_SYMBOL = Symbol("users");
+const CHAT_USER_USERNAME_SYMBOL = Symbol("username");
+const TYPE_CHAT_USER_MESSAGE = 0;
+const TYPE_CHAT_USER_USERS = 1;
+const TYPE_CHAT_USER_CHAT_HISTORY = 2;
+
 class ChatUser {
-    constructor(username) {
-        //profile which is sent to the server
-        this.userProfile = {
-            username: username,
-            key: "",
-            message: ""
-        };
+    constructor(username, url) {
+        this.webSocket = new WebSocket(url);
+        this.webSocket[CHAT_USER_USERNAME_SYMBOL] = username;
+        this.webSocket[CHAT_USER_MESSAGES_SYMBOL] = [];
+        this.webSocket[CHAT_USER_USERS_SYMBOL] = [];
 
-        this.join();
-    }
+        this.webSocket.onopen = function () {
+            this.send(JSON.stringify({
+                "type": 1,
+                "data": this[CHAT_USER_USERNAME_SYMBOL]
+            }));
+        }
 
-    //method for sending requests
-    request(method, url, headerName, headerValue, sendValue) {
-        return new Promise(function (resolve, reject) {
-            let req = new XMLHttpRequest();
-            req.open(method, url, true);
-            req.setRequestHeader(headerName, headerValue);
+        this.webSocket.onmessage = function (event) {
+            let message = JSON.parse(event.data);
 
-            req.onload = function () {
-                if (this.status >= 200 && this.status < 300) {
-                    resolve(req.response);
-                } else {
-                    reject({
-                        status: this.status,
-                        statusText: req.statusText
-                    });
+            if (message.type === TYPE_CHAT_USER_MESSAGE) {
+                this[CHAT_USER_MESSAGES_SYMBOL].push(message);
+
+            } else if (message.type === TYPE_CHAT_USER_USERS) {
+                this[CHAT_USER_USERS_SYMBOL] = message.data.split("|");
+
+            } else if (message.type === TYPE_CHAT_USER_CHAT_HISTORY) {
+                let history = message.data.split("|");
+                for(let i=0;i<history.length;i++){
+                    if(history[i] !== ""){
+                        let message = JSON.parse(history[i]);
+                        this[CHAT_USER_MESSAGES_SYMBOL].push(message);
+                    }
                 }
-            };
-            req.onerror = function () {
-                reject({
-                    status: this.status,
-                    statusText: req.statusText
-                });
-            };
-            req.send(sendValue);
-        });
-    }
-
-    //method for joining the chatroom
-    async join() {
-        let response = await this.request("POST", "/join", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        if(response == "|username taken|"){
-            this.userProfile.username += "_";
-            this.join();
-        }else{
-            this.userProfile.key = response;
+            }
         }
     }
 
-    //method for sending a message (requires complete userProfile)
-    async sendMessage(message) {
-        this.userProfile.message = message;
-        let response = await this.request("POST", "/sendMessage", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        if(response == "|user not found|"){
-            await this.join();
-            return this.sendMessage(message);
-        }
-        return response;
+    getUsers() {
+        return this.webSocket[CHAT_USER_USERS_SYMBOL];
     }
 
-    //method for receiving messages (requires complete userProfile)
-    async getMessages() {
-        this.userProfile.message = "";
-        let response = await this.request("POST", "/getMessages", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        if(response == "|user not found|"){
-            await this.join();
-            return this.getMessages();
-        }else{
-            return response;
-        }
+    getNewMessages() {
+        let messages = this.webSocket[CHAT_USER_MESSAGES_SYMBOL];
+        this.webSocket[CHAT_USER_MESSAGES_SYMBOL] = [];
+        return messages;
     }
 
-    //method for receiving users (requires complete userProfile)
-    async getUsers() {
-        this.userProfile.message = "";
-        let response = await this.request("POST", "/getUsers", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        if(response == "|user not found|"){
-            await this.join();
-            return this.getUsers();
-        }else{
-            return response;
+    sendMessage(message) {
+        if (this.webSocket.readyState === WebSocket.OPEN) {
+            this.webSocket.send(JSON.stringify({
+                "type": 0,
+                "data": message
+            }));
+            return true;
+        } else {
+            return false;
         }
     }
 
-    //method for leaving the chatroom (requires complete userProfile)
-    async leave() {
-        this.userProfile.message = "";
-        let response = await this.request("POST", "/leave", "Content-Type", "application/json", JSON.stringify(this.userProfile));
+    leave() {
+        this.webSocket.close();
     }
 }

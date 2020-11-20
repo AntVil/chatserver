@@ -1,177 +1,76 @@
-/* VARIABLES */
-//importing librarys
 const express = require('express');
 const path = require("path");
 const fs = require("fs");
-const app = express();
+const http = require('http');
+const WebSocket = require('ws');
 
-
-//serve webpage on port
-const port = 3000;
-//used to kick offline users
-const serverHeartBeat = 2000;//00;
-const clientHeartBeat = 1000;//00;
-
-//filepaths
+const serverHeartBeat = 2000;
+const appPort = 2000;
+const serverPort = 2001;
 const publicFolderPath = path.join(__dirname, "/../", 'public');
 const chatFilePath = path.join(__dirname, "chat.txt");
 
-//keeping track of online users
-let users = [];
-
-//chathistory
-let chatHistory;
-
-/* CONFIGURATING SERVER */
-app.use(express.json());
+const app = express();
 app.use(express.static(publicFolderPath));
 
 
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 
-/* HANDELING REQUESTS */
-//this function allows users to join the chat
-app.post("/join", function (req, res) {
-  let userProfile = req.body;
+const USER_NAME = Symbol("username");
+const USER_ID = Symbol("userid");
+const USER_CONNECTED = Symbol("userconnected");
 
-  if (userProfile.username === "") {
-    res.send("|username taken|");
-    return;
-  }
+let onlineUsers = [];
 
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].username == userProfile.username) {
-      res.send("|username taken|");
-      return;
-    }
-  }
-
-  let key = "";
-  for (let i = 0; i < 8; i++) {
-    key += String.fromCharCode(Math.floor(Math.random() * 26 + 65));
-  }
-  userProfile.key = key;
-  users.push(userProfile);
-  setTimeStamp(users.length - 1);
-
-  res.send(key);
-});
+wss.on('connection', function (ws) {
 
 
-//this function accepts messages and adds them to the chat
-app.post("/sendMessage", function (req, res) {
-  let userProfile = req.body;
-  let userIndex = getUserIndex(userProfile);
-  if (userIndex == -1) {
-    res.send("|user not found|");
-  } else {
-    setTimeStamp(userIndex);
+  ws[USER_NAME] = `<i>unknown${Date.now()}</i>`;
+  ws[USER_CONNECTED] = true;
 
-    let message = replaceToHTMLString(userProfile.message);
-    if (message.length === 0) {
-      res.send("message invalid (empty)");
-    } else {
-      let time = getTime();
-      let storedMessage = "#" + userProfile.username + "|" + time + "|" + message + "\n";
+  ws.on('pong', function () {
+    ws[USER_CONNECTED] = true;
+  });
 
-      fs.appendFileSync(chatFilePath, storedMessage);
+  ws.on('message', function (obj) {
+    let message = JSON.parse(obj);
 
-      maxChatHistory(10);
+    if(message.type === 0){
+      let saveMessage = replaceToHTMLString("" + message.data);
 
-      res.send("message sent");
-    }
-  }
-});
+      let date = new Date();
+      let time = ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2);
 
-//this function restricts the size of the chatFile and removes old messages if neccecary
-function maxChatHistory(maxLineBreakCount) {
-  let chatHistory = fs.readFileSync(chatFilePath, "utf-8");
-  let lineBreakCount = 0;
-  let indexOfAcceptableLineBreak = 0;
-  for(let i=chatHistory.length-1;i>=0;i--){
-    let character = chatHistory.charAt(i);
-    if(character === "\n"){
-      lineBreakCount++;
-      if(lineBreakCount >= maxLineBreakCount){
-        indexOfAcceptableLineBreak = i;
-        break;
+      let json = JSON.stringify({
+        "type": 0,
+        "data": saveMessage,
+        "user": ws[USER_NAME],
+        "time": time
+      });
+
+      fs.appendFileSync(chatFilePath, "\n|" + json);
+
+      wss.clients.forEach(function(client) {
+        client.send(json);
+      });
+      
+    }else if(message.type === 1){
+      let username = replaceToHTMLString("" + message.data).trim();
+      if(username.length !== 0 && validName(username)){
+        ws[USER_NAME] = username;
       }
     }
-  }
-  let newChatHistory = chatHistory.slice(indexOfAcceptableLineBreak, chatHistory.length-1).trim() + "\n";
-  fs.writeFileSync(chatFilePath, newChatHistory);
-}
+  });
 
-//this function sends the current chat
-//TODO: only send relevant messages
-app.post("/getMessages", function (req, res) {
-  let userProfile = req.body;
-  let userIndex = getUserIndex(userProfile);
-  if (userIndex == -1) {
-    res.send("|user not found|");
-  } else {
-    setTimeStamp(userIndex);
-    res.send(fs.readFileSync(chatFilePath));
-  }
+  let chatHistory = fs.readFileSync(chatFilePath, "utf-8");
+  ws.send(JSON.stringify({
+    "type": 2,
+    "data": chatHistory,
+    "id": ws[USER_ID]
+  }));
 });
 
-
-//this function returns the list of currently online users
-app.post("/getUsers", function (req, res) {
-  let userProfile = req.body;
-  let userIndex = getUserIndex(userProfile);
-  if (userIndex == -1) {
-    res.send("|user not found|");
-  } else {
-    setTimeStamp(userIndex);
-    let userList = "";
-    for (let i = 0; i < users.length; i++) {
-      userList += "#" + users[i].username;
-    }
-    res.send(userList);
-  }
-});
-
-
-//this function unregisters a user
-app.post("/leave", function (req, res) {
-  let userProfile = req.body;
-
-  let userIndex = getUserIndex(userProfile);
-  if (userIndex == -1) {
-    res.send("|user not found|");
-    return;
-  } else {
-    users.splice(userIndex, 1);
-    res.send("left chat");
-  }
-});
-
-
-
-//this function kicks users who were not online for a while
-function kick() {
-  for (let i = users.length - 1; i >= 0; i--) {
-    if (Date.now() - users[i].timeStamp > clientHeartBeat) {
-      users.splice(i, 1);
-    }
-  }
-}
-
-
-
-
-
-/* HELPERFUNCTIONS */
-function getUserIndex(userProfile) {
-  let userIndex = -1;
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].username == userProfile.username && users[i].key == userProfile.key) {
-      userIndex = i;
-      break;
-    }
-  }
-  return userIndex;
-}
 
 function replaceToHTMLString(str) {
   let result = "";
@@ -182,7 +81,7 @@ function replaceToHTMLString(str) {
 }
 
 function replaceToHTMLChar(char) {
-  let specialChars = ["&", "<", ">", "#", "|", '"', "'", "´", "!", "\n"];
+  let specialChars = ["&", "<", ">", "#", "|", '"', "'", "´", "!", "\n", "{", "}", "(", ")", "[", "]"];
   let specialCharDict = {
     "&": "&amp",
     "<": "&lt;",
@@ -193,7 +92,14 @@ function replaceToHTMLChar(char) {
     "'": "&apos;",
     "´": "&acute;",
     "!": "&excl;",
-    "\n": "<br>"
+    "\n": "<br>",
+    "{": "&lbrace;", 
+    "}": "&rbrace;", 
+    "(": "&lpar;", 
+    ")": "&rpar;", 
+    "[": "&lbrack;", 
+    "]": "&rbrack;"
+
   }
   if (specialChars.includes(char)) {
     return specialCharDict[char];
@@ -202,28 +108,48 @@ function replaceToHTMLChar(char) {
   }
 }
 
-function setTimeStamp(userIndex) {
-  users[userIndex].timeStamp = Date.now();
+
+function validName(name){
+  return !onlineUsers.includes(name);
 }
 
 
-function getTime() {
-  let date = new Date();
-  let hours = date.getHours().toString();
-  let minutes = date.getMinutes().toString();
-  if (hours.length == 1) {
-    hours = "0" + hours;
-  }
-  if (minutes.length == 1) {
-    minutes = "0" + minutes;
-  }
-  return hours + ":" + minutes;
-}
 
+app.listen(appPort, function () {
+  if(fs.readFileSync(chatFilePath, "utf-8").trim().length === 0){
+    fs.writeFileSync(chatFilePath, `{"type":0,"data":"Welcome to the Chat","user":"","time":""}`);
 
-/* START SERVER */
-app.listen(port, () => {
-  console.log("serving on port: " + port);
-  console.log("kicking users every " + serverHeartBeat + "ms, who were not online for " + clientHeartBeat + "ms");
-  setInterval(kick, serverHeartBeat);
+  }
+  console.log(`serving on port ${appPort}.`);
 });
+
+server.listen(serverPort, function() {
+  console.log(`serving on port ${serverPort}`);
+});
+
+
+setInterval(function () {
+  onlineUsers = [];
+
+  wss.clients.forEach(function(client) {
+    if (!client[USER_CONNECTED]) {
+      client.terminate();
+    }else{
+      onlineUsers.push(client[USER_NAME]);
+      //console.log(client[USER_NAME]);
+      client[USER_CONNECTED] = false;
+      client.ping(null, false, true);
+    }
+  });
+
+  let json = JSON.stringify({
+    "type": 1,
+    "data": onlineUsers.join("|")
+  });
+
+  
+  wss.clients.forEach(function(client) {
+    client.send(json);
+  });
+
+}, serverHeartBeat);

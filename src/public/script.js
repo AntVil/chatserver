@@ -20,58 +20,63 @@ window.onload = function() {
     chatBoxElement = document.getElementById("chat-box");
     chatAutoScrollCheckbox = document.getElementById("chat-autoScroll");
     backgroundElement = document.getElementById("background");
+    aboutElement = document.getElementById("about");
+    usersElement = document.getElementById("users");
 
     frame = 0;
     loop();
 }
 
-async function loop() {
+function loop() {
+    //get chat every 30 frames = 1/2sec
+    if (user !== null && frame % 30 === 0) {
+        let messages = user.getNewMessages();
+        renderChat(messages);
 
-    //get chat every 60 frames = 1sec
-    if (user !== null && frame % 60 === 0) {
-        let chat = await user.getMessages();
-        renderChat(chat);
-
-        let userList = await user.getUsers();
+        let userList = user.getUsers();
         renderUsers(userList);
     }
-
-    //scroll text all the time
     scrollText();
 
     frame++;
     requestAnimationFrame(loop);
 }
-
-
-function renderChat(chat) {
-    let messages = chat.split("#");
-    messagesElement.innerHTML = "";
-    for (let i = 1; i < messages.length; i++) {
-        let messageData = messages[i].split("|");
-        let name = messageData[0];
-        let time = messageData[1];
-        let message = messageData[2];
-        messagesElement.innerHTML += `
-        <div class="chat-message">
-            <div class="chat-metadata">
-                <span class="chat-metadata-name">${name}</span>
-                <span class="chat-metadata-time">${time}</span>
-            </div>
-            <br>
-            <div class="chat-text">
-                ${message}
-            </div>
-        </div>
-        `;
+function renderUsers(userList){
+    usersElement.innerHTML = "";
+    for (let i = 0; i < userList.length; i++) {
+        // usersElement.innerHTML += users[i] + "<br>";
+        let userElement = document.createElement("div");
+        userElement.classList.add("user-list");
+        userElement.innerHTML = userList[i];
+        usersElement.appendChild(userElement);
     }
 }
+function renderChat(messages){
+    for (let i = 0; i < messages.length; i++) {
+        let name = messages[i].user;
+        let time = messages[i].time;
+        let message = messages[i].data;
 
-function renderUsers(userList) {
-    let users = userList.split("#");
-    usersElement.innerHTML = "";
-    for (let i = 1; i < users.length; i++) {
-        usersElement.innerHTML += users[i] + "<br>";
+        let messageElement = document.createElement("div");
+        let metaElement = document.createElement("div");
+        let metaNameElement = document.createElement("span");
+        let metaTimeElement = document.createElement("span");
+        let textElement = document.createElement("div");
+
+        messageElement.classList.add('chat-message');
+        metaElement.classList.add('chat-metadata');
+        metaNameElement.classList.add('chat-metadata-name');
+        metaTimeElement.classList.add('chat-metadata-time');
+        textElement.classList.add('chat-text');
+
+        messageElement.append(metaElement, textElement);
+        metaElement.append(metaNameElement, metaTimeElement);
+
+        metaNameElement.innerHTML = name;
+        metaTimeElement.innerHTML = time;
+        textElement.innerHTML = message;
+
+        messagesElement.appendChild(messageElement);
     }
 }
 
@@ -97,16 +102,15 @@ function backgroundAnimation() {
     backgroundElement.style.backgroundSize = "15%";
 }
 
-
 /* FUNCTIONS CALLED BY USER (BUTTON) */
 function join() {
     let username = document.getElementById("username").value;
-    user = new ChatUser(username);
+    user = new ChatUser(username, "ws://localhost:2001/");
 
     loginScreenElement.style.display = "none";
     chatScreenElement.style.display = "flex";
 
-    backgroundAnimation();
+    //backgroundAnimation();
 }
 
 function sendMessage() {
@@ -118,6 +122,6 @@ function leave() {
     user.leave();
     user = null;
 
-    loginScreenElement.style.display = "block";
+    loginScreenElement.style.display = "flex";
     chatScreenElement.style.display = "none";
 }
