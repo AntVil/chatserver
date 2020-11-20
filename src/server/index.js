@@ -28,7 +28,7 @@ let onlineUsers = [];
 
 wss.on('connection', function (ws) {
 
-  ws[USER_NAME] = "";
+  ws[USER_NAME] = "<i>unknown</i>";
   ws[USER_ID] = "" + Math.floor(Math.random() * 100000 + 900000);
   ws[USER_CONNECTED] = true;
 
@@ -36,27 +36,40 @@ wss.on('connection', function (ws) {
     ws[USER_CONNECTED] = true;
   });
 
-  ws.on('message', function (prefixMessage) {
-    if(prefixMessage.startsWith("setUsername")){
-      let username = prefixMessage.split("setUsername")[1];
-      ws[USER_NAME] = replaceToHTMLString(username);
-    }else if(prefixMessage.startsWith("getUsers")){
-      ws.send(onlineUsers);
-    }else if(prefixMessage.startsWith("sendMessage")){
-      let message = message.split("prefixMessage")[i];
-      let saveMessage = replaceToHTMLString(message);
+  ws.on('message', function (obj) {
+    let message = JSON.parse(obj);
 
-      fs.appendFileSync(chatFilePath, saveMessage);
-  
-      wss.clients.forEach(function(client) {
-        client.send(saveMessage);
+    if(message.type === 0){
+      let saveMessage = replaceToHTMLString("" + message.data);
+
+      let date = new Date();
+      let time = ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2);
+
+      let json = JSON.stringify({
+        "type": 0,
+        "data": saveMessage,
+        "user": ws[USER_NAME],
+        "time": time
       });
+
+      fs.appendFileSync(chatFilePath, "\n|" + json);
+
+      wss.clients.forEach(function(client) {
+        client.send(json);
+      });
+      
+    }else if(message.type === 1){
+      let username = replaceToHTMLString("" + message.data);
+      ws[USER_NAME] = username;
     }
   });
 
   let chatHistory = fs.readFileSync(chatFilePath, "utf-8");
-  ws.send(chatHistory);
-  ws.send(ws[USER_ID]);
+  ws.send(JSON.stringify({
+    "type": 2,
+    "data": chatHistory,
+    "id": ws[USER_ID]
+  }));
 });
 
 
@@ -70,7 +83,7 @@ function replaceToHTMLString(str) {
 }
 
 function replaceToHTMLChar(char) {
-  let specialChars = ["&", "<", ">", "#", "|", '"', "'", "´", "!", "\n"];
+  let specialChars = ["&", "<", ">", "#", "|", '"', "'", "´", "!", "\n", "{", "}", "(", ")", "[", "]"];
   let specialCharDict = {
     "&": "&amp",
     "<": "&lt;",
@@ -81,7 +94,13 @@ function replaceToHTMLChar(char) {
     "'": "&apos;",
     "´": "&acute;",
     "!": "&excl;",
-    "\n": "<br>"
+    "\n": "<br>",
+    "{": "&lbrace;", 
+    "}": "&rbrace;", 
+    "(": "&lpar;", 
+    ")": "&rpar;", 
+    "[": "&lbrack;", 
+    "]": "&rbrack;"
   }
   if (specialChars.includes(char)) {
     return specialCharDict[char];
@@ -106,6 +125,7 @@ setInterval(function () {
   onlineUsers = [];
 
   wss.clients.forEach(function(client) {
+    console.log("hello!");
     if (!client[USER_CONNECTED]) {
       client.terminate();
     }else{

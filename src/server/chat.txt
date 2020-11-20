@@ -1,5 +1,4 @@
-#User1|00:00|some messages here!
-#User1|00:01|to test! wow!
-#User2|01:00|message 1
-message 2
-message 3
+|{"type":0,"data":"123&excl;","user":"","time":"12:54"}
+|{"type":0,"data":"Hello World&excl;","user":"","time":"12:55"}
+|{"type":0,"data":"&lt;script&gt;","user":"","time":"12:55"}
+|{"type":0,"data":"abc","user":"","time":"13:35"}

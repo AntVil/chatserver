@@ -23,10 +23,10 @@ function loop() {
 
     //get chat every 120 frames = 2sec
     if (user !== null && frame % 120 === 0) {
-        let messages = user.getMessages();
+        //let messages = user.getMessages();
         //TODO: handle messages
-        renderChat(messages);
-        let userList = user.getUsers();
+        //renderChat(messages);
+        //let userList = user.getUsers();
         //TODO: handle users
     }
 
@@ -58,12 +58,12 @@ function scrollText() {
 /* FUNCTIONS CALLED BY USER (BUTTON) */
 function join() {
     let username = document.getElementById("username").value;
-    user = new ChatUser("ws://localhost:2001/");
+    user = new ChatUser(username, "ws://localhost:2001/");
 
     loginScreenElement.style.display = "none";
     chatScreenElement.style.display = "flex";
 
-    backgroundAnimation();
+    //backgroundAnimation();
 }
 
 function sendMessage() {

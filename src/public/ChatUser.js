@@ -13,7 +13,7 @@ class ChatUser {
 
         this.webSocket.onopen = function () {
             this.send(JSON.stringify({
-                "type": 0,
+                "type": 1,
                 "data": this[CHAT_USER_USERNAME_SYMBOL]
             }));
         }
@@ -28,7 +28,13 @@ class ChatUser {
                 this[CHAT_USER_USERS_SYMBOL] = message.split("|");
 
             } else if (message.type === TYPE_CHAT_USER_CHAT_HISTORY) {
-                this[CHAT_USER_MESSAGES_SYMBOL] = message.split("|");
+                let history = message.data.split("|");
+                for(let i=0;i<history.length;i++){
+                    if(history[i] !== ""){
+                        let message = JSON.parse(history[i]);
+                        this[CHAT_USER_MESSAGES_SYMBOL].push(message);
+                    }
+                }
             }
         }
     }
