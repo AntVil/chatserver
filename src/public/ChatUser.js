@@ -10,6 +10,7 @@ class ChatUser {
         this.webSocket = new WebSocket(url);
         this.webSocket[CHAT_USER_USERNAME_SYMBOL] = username;
         this.webSocket[CHAT_USER_MESSAGES_SYMBOL] = [];
+        this.webSocket[CHAT_USER_USERS_SYMBOL] = [];
 
         this.webSocket.onopen = function () {
             this.send(JSON.stringify({

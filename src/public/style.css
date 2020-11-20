@@ -186,6 +186,12 @@
     margin: 10px
 }
 
+.user-list{
+    padding: 2px;
+    border-radius: 5px;
+    border: 2px solid var(--usersBordercolor);
+}
+
 #column2chat {
     display: block;
 }

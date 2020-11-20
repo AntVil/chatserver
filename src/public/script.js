@@ -30,14 +30,12 @@ window.onload = function () {
 
 function loop() {
 
-    //get chat every 120 frames = 2sec
-    if (user !== null && frame % 120 === 0) {
+    //get chat every 30 frames = 1/2sec
+    if (user !== null && frame % 30 === 0) {
         let messages = user.getNewMessages();
-        //TODO: handle messages
         renderChat(messages);
+
         let userList = user.getUsers();
-        console.log(userList);
-        //TODO: handle users
         renderUsers(userList);
     }
     scrollText();
@@ -45,10 +43,11 @@ function loop() {
     requestAnimationFrame(loop);
 }
 function renderUsers(userList){
+    usersElement.innerHTML = "";
     for (let i = 0; i < userList.length; i++) {
         // usersElement.innerHTML += users[i] + "<br>";
         let userElement = document.createElement("div");
-        userElement.classList.add('user-list');
+        userElement.classList.add("user-list");
         userElement.innerHTML = userList[i];
         usersElement.appendChild(userElement);
     }

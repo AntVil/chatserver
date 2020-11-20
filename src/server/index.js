@@ -5,7 +5,7 @@ const http = require('http');
 const WebSocket = require('ws');
 
 
-const serverHeartBeat = 5000;
+const serverHeartBeat = 2000;
 const appPort = 2000;
 const serverPort = 2001;
 const publicFolderPath = path.join(__dirname, "/../", 'public');
@@ -138,6 +138,7 @@ setInterval(function () {
       client.terminate();
     }else{
       onlineUsers.push(client[USER_NAME]);
+      //console.log(client[USER_NAME]);
       client[USER_CONNECTED] = false;
       client.ping(null, false, true);
     }
@@ -148,7 +149,9 @@ setInterval(function () {
     "data": onlineUsers.join("|")
   });
 
+  
   wss.clients.forEach(function(client) {
     client.send(json);
   });
+
 }, serverHeartBeat);
