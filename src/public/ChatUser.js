@@ -19,44 +19,6 @@ class ChatUser{
                 for(let i=0;i<messages.length;i++){
                     this[CHAT_USER_MESSAGES_SYMBOL].push(message);
                 }
-<<<<<<< Updated upstream
-            };
-            req.onerror = function () {
-                reject({
-                    status: this.status,
-                    statusText: req.statusText
-                });
-            };
-            req.send(sendValue);
-        });
-    }
-
-    //method for joining the chatroom
-    async join() {
-        let response = await this.request("POST", "/join", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        this.userProfile.key = response;
-    }
-
-    //method for sending a message (requires complete userProfile)
-    async sendMessage(message) {
-        this.userProfile.message = message;
-        let response = await this.request("POST", "/sendMessage", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        return response;
-    }
-
-    //method for receiving messages (requires complete userProfile)
-    async getMessages() {
-        this.userProfile.message = "";
-        let response = await this.request("POST", "/getMessages", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        return response;
-    }
-
-    //method for receiving users (requires complete userProfile)
-    async getUsers() {
-        this.userProfile.message = "";
-        let response = await this.request("POST", "/getUsers", "Content-Type", "application/json", JSON.stringify(this.userProfile));
-        return response;
-=======
             }
         }
     }
@@ -74,10 +36,29 @@ class ChatUser{
         }else{
             return false;
         }
->>>>>>> Stashed changes
     }
 
     leave(){
         this.webSocket.close();
     }
 }
+
+/*
+got messages
+
+{
+    chatHistory: [],
+    id: String,
+    type: int,
+    data: "123213123<br>123",
+    time: int
+}
+
+send messages
+
+{
+    type: int,
+    userId: String,
+    data: String | []
+}
+*/
