@@ -119,6 +119,9 @@ function validName(name){
 
 
 app.listen(appPort, function () {
+  if(fs.readFileSync(chatFilePath, "utf-8").trim().length === 0){
+    fs.writeFileSync(chatFilePath, `{"type":0,"data":"Welcome to the Chat","user":"","time":""}`);
+  }
   console.log(`serving on port ${appPort}.`);
 });
 

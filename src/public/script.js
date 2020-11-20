@@ -49,18 +49,27 @@ function renderChat(messages){
         let name = messages[i].user;
         let time = messages[i].time;
         let message = messages[i].data;
-        messagesElement.innerHTML += `
-        <div class="chat-message">
-            <div class="chat-metadata">
-                <span class="chat-metadata-name">${name}</span>
-                <span class="chat-metadata-time">${time}</span>
-            </div>
-            <br>
-            <div class="chat-text">
-                ${message}
-            </div>
-        </div>
-        `;
+
+        let messageElement = document.createElement("div");
+        let metaElement = document.createElement("div");
+        let metaNameElement = document.createElement("span");
+        let metaTimeElement = document.createElement("span");
+        let textElement = document.createElement("div");
+
+        messageElement.classList.add('chat-message');
+        metaElement.classList.add('chat-metadata');
+        metaNameElement.classList.add('chat-metadata-name');
+        metaTimeElement.classList.add('chat-metadata-time');
+        textElement.classList.add('chat-text');
+
+        messageElement.append(metaElement, textElement);
+        metaElement.append(metaNameElement, metaTimeElement);
+
+        metaNameElement.innerHTML = name;
+        metaTimeElement.innerHTML = time;
+        textElement.innerHTML = message;
+
+        messagesElement.appendChild(messageElement);
     }
 }
 function scrollText() {
