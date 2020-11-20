@@ -22,6 +22,7 @@ window.onload = function () {
     chatAutoScrollCheckbox = document.getElementById("chat-autoScroll");
     backgroundElement = document.getElementById("background");
     aboutElement = document.getElementById("about");
+    usersElement = document.getElementById("users");
 
     frame = 0;
     loop();
@@ -34,15 +35,23 @@ function loop() {
         let messages = user.getNewMessages();
         //TODO: handle messages
         renderChat(messages);
-        //let userList = user.getUsers();
+        let userList = user.getUsers();
+        console.log(userList);
         //TODO: handle users
+        renderUsers(userList);
     }
     scrollText();
     frame++;
     requestAnimationFrame(loop);
 }
-function renderUser(){
-
+function renderUsers(userList){
+    for (let i = 0; i < userList.length; i++) {
+        // usersElement.innerHTML += users[i] + "<br>";
+        let userElement = document.createElement("div");
+        userElement.classList.add('user-list');
+        userElement.innerHTML = userList[i];
+        usersElement.appendChild(userElement);
+    }
 }
 function renderChat(messages){
     for (let i = 0; i < messages.length; i++) {
