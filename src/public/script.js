@@ -1,6 +1,14 @@
 //TODO: send refresh requests every 10sec even when window closed (-> web worker)
 let user;
 
+let loginScreenElement;
+let chatScreenElement;
+let usersElement;
+let messagesElement;
+let chatBoxElement;
+let chatAutoScrollCheckbox;
+let backgroundElement; //background animation in chat-screen
+
 let frame;
 
 window.onload = function () {
@@ -23,21 +31,37 @@ function loop() {
 
     //get chat every 120 frames = 2sec
     if (user !== null && frame % 120 === 0) {
-        //let messages = user.getMessages();
+        let messages = user.getNewMessages();
         //TODO: handle messages
-        //renderChat(messages);
+        renderChat(messages);
         //let userList = user.getUsers();
         //TODO: handle users
     }
-
+    scrollText();
     frame++;
     requestAnimationFrame(loop);
 }
 function renderUser(){
 
 }
-function renderChat(chat){
-
+function renderChat(messages){
+    for (let i = 0; i < messages.length; i++) {
+        let name = messages[i].user;
+        let time = messages[i].time;
+        let message = messages[i].data;
+        messagesElement.innerHTML += `
+        <div class="chat-message">
+            <div class="chat-metadata">
+                <span class="chat-metadata-name">${name}</span>
+                <span class="chat-metadata-time">${time}</span>
+            </div>
+            <br>
+            <div class="chat-text">
+                ${message}
+            </div>
+        </div>
+        `;
+    }
 }
 function scrollText() {
     /* Tried to make autoscroll only if there is no manual scrolling happening, no sucess yet.
