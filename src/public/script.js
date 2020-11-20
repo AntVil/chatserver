@@ -29,8 +29,17 @@ function loop() {
 /* FUNCTIONS CALLED BY USER (BUTTON) */
 function join() {
     let username = document.getElementById("username").value;
+<<<<<<< Updated upstream
     user = new ChatUser(username);
     //TODO: change appearance
+=======
+    user = new ChatUser("ws://localhost:2001/");
+
+    loginScreenElement.style.display = "none";
+    chatScreenElement.style.display = "flex";
+
+    backgroundAnimation();
+>>>>>>> Stashed changes
 }
 
 function sendMessage() {
