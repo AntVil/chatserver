@@ -4,9 +4,10 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Chatserver</title>
+    <title>//Chat.server</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
+    <link rel="icon" type="image/png" href="images/Logo.png">
     <link rel="stylesheet" href="style.css">
 
     <script type="text/javascript" src="ChatUser.js"></script>
@@ -14,18 +15,62 @@
 </head>
 
 <body>
+    <aside id="background">
+        <div id="logoHeader">
+            <img src="images/Logo.png" alt="message icon logo" id="logoImg">
+            <p id="logoTxt"> //Chat.server</p>
+        </div>
+    </aside>
 
-    <div id="login-screen">
-        <label for="username">Username: </label>
-        <input id="username" name="username" placeholder="username" />
-        <button onclick="join()">join</button>
-    </div>
 
-    <div id="chat-screen">
-        <input id="message" type="text" placeholder="message" />
-        <button onclick="sendMessage()">sendMessage</button>
-        <button onclick="leave()">leave</button>
-    </div>
+    <header id="login-screen">
+
+        <div id="login-window">
+            <!-- Label not necessary -->
+            <label for="username">Username: </label>
+            <input id="username" name="username" placeholder="Username" />
+            <div>
+                <button onclick="join()">join</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="chat-screen">
+        <section id="column1users">
+            <div id="users"></div>
+        </section>
+
+
+        <section id="column2chat">
+            <article id="chat-box">
+                <div id="messages"></div>
+            </article>
+
+            <form id="chat-input">
+                <textarea id="message" type="text" placeholder="message" rows="4" cols="100"></textarea>
+                <div id="chat-util">
+                    <button onclick="sendMessage()">sendMessage</button>
+                    <button onclick="leave()">leave</button>
+                    <label for="chat-autoScroll">autoScroll</label>
+                    <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
+                </div>
+            </form>
+        </section>
+
+        <aside id="column3iframes">
+
+        </aside>
+    </main>
+
+    <!-- maybe add "about" section, currently display: none, 
+        toggle maybe -->
+    <footer id="about">
+        <p>
+            Welcome to the Web-Engineering-Project Chatserver made by
+            <br> Anton Böhler, Jan Broer and Alexander Dietrich.
+            <br><br>
+        </p>
+    </footer>
 
 </body>
 
