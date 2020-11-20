@@ -28,8 +28,7 @@ let onlineUsers = [];
 
 wss.on('connection', function (ws) {
 
-  ws[USER_NAME] = "<i>unknown</i>";
-  ws[USER_ID] = "" + Math.floor(Math.random() * 100000 + 900000);
+  ws[USER_NAME] = `<i>unknown${Date.now()}</i>`;
   ws[USER_CONNECTED] = true;
 
   ws.on('pong', function () {
@@ -59,8 +58,10 @@ wss.on('connection', function (ws) {
       });
       
     }else if(message.type === 1){
-      let username = replaceToHTMLString("" + message.data);
-      ws[USER_NAME] = username;
+      let username = replaceToHTMLString("" + message.data).trim();
+      if(username.length !== 0 && validName(username)){
+        ws[USER_NAME] = username;
+      }
     }
   });
 
@@ -110,6 +111,11 @@ function replaceToHTMLChar(char) {
 }
 
 
+function validName(name){
+  return !onlineUsers.includes(name);
+}
+
+
 
 
 app.listen(appPort, function () {
@@ -125,12 +131,21 @@ setInterval(function () {
   onlineUsers = [];
 
   wss.clients.forEach(function(client) {
-    console.log("hello!");
     if (!client[USER_CONNECTED]) {
       client.terminate();
     }else{
+      onlineUsers.push(client[USER_NAME]);
       client[USER_CONNECTED] = false;
       client.ping(null, false, true);
     }
+  });
+
+  let json = JSON.stringify({
+    "type": 1,
+    "data": onlineUsers.join("|")
+  });
+
+  wss.clients.forEach(function(client) {
+    client.send(json);
   });
 }, serverHeartBeat);

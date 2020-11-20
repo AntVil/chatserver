@@ -25,7 +25,7 @@ class ChatUser {
                 this[CHAT_USER_MESSAGES_SYMBOL].push(message);
 
             } else if (message.type === TYPE_CHAT_USER_USERS) {
-                this[CHAT_USER_USERS_SYMBOL] = message.split("|");
+                this[CHAT_USER_USERS_SYMBOL] = message.data.split("|");
 
             } else if (message.type === TYPE_CHAT_USER_CHAT_HISTORY) {
                 let history = message.data.split("|");
@@ -40,7 +40,7 @@ class ChatUser {
     }
 
     getUsers() {
-        return this.webSocket[CHAT_USER_USERS];
+        return this.webSocket[CHAT_USER_USERS_SYMBOL];
     }
 
     getNewMessages() {
@@ -65,23 +65,3 @@ class ChatUser {
         this.webSocket.close();
     }
 }
-
-/*
-got messages
-
-{
-    id: String,        //user id when logging in first time
-    type: int,         //type of message
-    data: String | [],      //data send; message | chathistory
-    time: int,         //time of sending
-    user: String    //by who
-}
-
-send messages
-
-{
-    type: int,
-    userId: String,
-    data: String | []
-}
-*/
