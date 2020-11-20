@@ -1,4 +1,3 @@
-//TODO: send refresh requests every 10sec even when window closed (-> web worker)
 let user;
 
 let loginScreenElement;
@@ -11,7 +10,7 @@ let backgroundElement; //background animation in chat-screen
 
 let frame;
 
-window.onload = function () {
+window.onload = function() {
     user = null;
 
     loginScreenElement = document.getElementById("login-screen");
@@ -29,7 +28,6 @@ window.onload = function () {
 }
 
 function loop() {
-
     //get chat every 30 frames = 1/2sec
     if (user !== null && frame % 30 === 0) {
         let messages = user.getNewMessages();
@@ -39,6 +37,7 @@ function loop() {
         renderUsers(userList);
     }
     scrollText();
+
     frame++;
     requestAnimationFrame(loop);
 }
@@ -80,6 +79,7 @@ function renderChat(messages){
         messagesElement.appendChild(messageElement);
     }
 }
+
 function scrollText() {
     /* Tried to make autoscroll only if there is no manual scrolling happening, no sucess yet.
 
@@ -94,6 +94,12 @@ function scrollText() {
     if (chatAutoScrollCheckbox.checked /*&& down*/ ) {
         chatBoxElement.scrollTop = chatBoxElement.scrollHeight;
     }
+}
+
+//does not work currently, background image jumps without 2s transition
+function backgroundAnimation() {
+    backgroundElement.style.transition = "background-image 2s";
+    backgroundElement.style.backgroundSize = "15%";
 }
 
 /* FUNCTIONS CALLED BY USER (BUTTON) */
@@ -114,6 +120,8 @@ function sendMessage() {
 
 function leave() {
     user.leave();
+    user = null;
+
     loginScreenElement.style.display = "flex";
     chatScreenElement.style.display = "none";
 }

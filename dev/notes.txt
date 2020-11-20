@@ -1,9 +1,35 @@
--username
-+show who is online
+"-" -> essential
+"+" -> additional
+"#" -> implemented/fixed
+":" -> scraped/fixed
+
+#username
+#show who is online
++show who is typing
 +export chat
--message: text, username, date
-+message iterception (front- & backend)
+#message: text, username, date
+#message iterception (front- & backend)
 -save to text-document
-+log out
-+on tab close #unreliable
-+constant refresh requests (web worker)
+#log out
+#on tab close -> unreliable
+:constant refresh requests (web worker)
++support special characters
++support other forms of data (images, video, ...)
+#autoscroll
+
+
+/*  notes/Ideas:
+
+    -first, only login srcreen shows
+        -Picture, logo, top&sides
+        -username &join middle bottom
+    -chat screen shows after login
+        -slide in, graphics (logo) sweep to a different location on screen an change their size to accomodate the chat window
+        -button animations
+        -text bubble (bubbly motions when received/sent)
+*/
+
+Additions/fixes: 
+    - display not only time, but also date of the message
+    - Autoscroll: disable automatically when manual scrolling 
+    - login by pressing enter after name input

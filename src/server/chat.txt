@@ -1,4 +1,0 @@
-{"type":0,"data":"Welcome to the Chat","user":"","time":""}
-|{"type":0,"data":"hello","user":"<i>unknown1605880270793</i>","time":"14:51"}
-|{"type":0,"data":"asd","user":"123","time":"14:51"}
-|{"type":0,"data":"das ist ein test etzrg","user":"test","time":"15:13"}

@@ -4,13 +4,11 @@ const fs = require("fs");
 const http = require('http');
 const WebSocket = require('ws');
 
-
 const serverHeartBeat = 2000;
 const appPort = 2000;
 const serverPort = 2001;
 const publicFolderPath = path.join(__dirname, "/../", 'public');
 const chatFilePath = path.join(__dirname, "chat.txt");
-
 
 const app = express();
 app.use(express.static(publicFolderPath));
@@ -19,7 +17,6 @@ app.use(express.static(publicFolderPath));
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-
 const USER_NAME = Symbol("username");
 const USER_ID = Symbol("userid");
 const USER_CONNECTED = Symbol("userconnected");
@@ -27,6 +24,7 @@ const USER_CONNECTED = Symbol("userconnected");
 let onlineUsers = [];
 
 wss.on('connection', function (ws) {
+
 
   ws[USER_NAME] = `<i>unknown${Date.now()}</i>`;
   ws[USER_CONNECTED] = true;
@@ -74,7 +72,6 @@ wss.on('connection', function (ws) {
 });
 
 
-
 function replaceToHTMLString(str) {
   let result = "";
   for (let i = 0; i < str.length; i++) {
@@ -102,6 +99,7 @@ function replaceToHTMLChar(char) {
     ")": "&rpar;", 
     "[": "&lbrack;", 
     "]": "&rbrack;"
+
   }
   if (specialChars.includes(char)) {
     return specialCharDict[char];
@@ -117,10 +115,10 @@ function validName(name){
 
 
 
-
 app.listen(appPort, function () {
   if(fs.readFileSync(chatFilePath, "utf-8").trim().length === 0){
     fs.writeFileSync(chatFilePath, `{"type":0,"data":"Welcome to the Chat","user":"","time":""}`);
+
   }
   console.log(`serving on port ${appPort}.`);
 });
