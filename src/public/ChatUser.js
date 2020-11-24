@@ -65,4 +65,8 @@ class ChatUser {
     leave() {
         this.webSocket.close();
     }
+
+    getUsername(){
+        return this.webSocket[CHAT_USER_USERNAME_SYMBOL];
+    }
 }

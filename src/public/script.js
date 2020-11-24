@@ -1,5 +1,5 @@
-const OWN_MESSAGE_STYLE = "";
-const OUTSIDER_MESSAGE_STYLE = "";
+const OWN_MESSAGE_STYLE = "o";
+const OUTSIDER_MESSAGE_STYLE = "u";
 
 let user;
 
@@ -48,7 +48,6 @@ function loop() {
 function renderUsers(userList) {
     usersElement.innerHTML = "";
     for (let i = 0; i < userList.length; i++) {
-        // usersElement.innerHTML += users[i] + "<br>";
         let userElement = document.createElement("div");
         userElement.classList.add("user-list");
         userElement.innerHTML = userList[i];
@@ -79,6 +78,12 @@ function renderChat(messages) {
         metaNameElement.innerHTML = name;
         metaTimeElement.innerHTML = time;
         textElement.innerHTML = message;
+
+        if(name === user.getUsername()){
+            messageElement.classList.add(OWN_MESSAGE_STYLE);
+        }else{
+            messageElement.classList.add(OUTSIDER_MESSAGE_STYLE);
+        }
 
         messagesElement.appendChild(messageElement);
     }
