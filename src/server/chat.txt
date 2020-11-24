@@ -31,3 +31,11 @@
 |{"type":0,"data":"xD","user":"test","time":"15:29"}
 |{"type":0,"data":"lmao<br>","user":"<i>unknown1606228426392</i>","time":"15:33"}
 >>>>>>> 0ef6f184d28d47f5952aa8dee7c31738d6e1d359
+
+|{"type":0,"data":"kjhgj","user":"<i>unknown1606232240811</i>","time":"16:37"}
+|{"type":0,"data":"kjhgj","user":"<i>unknown1606232240811</i>","time":"16:37"}
+|{"type":0,"data":":D","user":"<i>unknown1606232240811</i>","time":"16:39"}
+|{"type":0,"data":":D&lt;3","user":"<i>unknown1606232240811</i>","time":"16:40"}
+|{"type":0,"data":"&lt;3","user":"<i>unknown1606232240811</i>","time":"16:40"}
+|{"type":0,"data":"&lt;3$;P","user":"<i>unknown1606232240811</i>","time":"16:40"}
+|{"type":0,"data":"&lt;3$;P","user":"<i>unknown1606232240811</i>","time":"16:40"}
