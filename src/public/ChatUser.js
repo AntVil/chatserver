@@ -4,6 +4,10 @@ const CHAT_USER_USERNAME_SYMBOL = Symbol("username");
 const TYPE_CHAT_USER_MESSAGE = 0;
 const TYPE_CHAT_USER_USERS = 1;
 const TYPE_CHAT_USER_CHAT_HISTORY = 2;
+const TYPE_CHAT_USER_NAME = 3;
+
+const TYPE_CHAT_SERVER_MESSAGE = 0;
+const TYPE_CHAT_SERVER_NAME_CHANGE = 1;
 
 class ChatUser {
     constructor(username, url) {
@@ -14,7 +18,7 @@ class ChatUser {
 
         this.webSocket.onopen = function () {
             this.send(JSON.stringify({
-                "type": 1,
+                "type": TYPE_CHAT_SERVER_NAME_CHANGE,
                 "data": this[CHAT_USER_USERNAME_SYMBOL]
             }));
         }
@@ -36,6 +40,8 @@ class ChatUser {
                         this[CHAT_USER_MESSAGES_SYMBOL].push(message);
                     }
                 }
+            }else if(message.type === TYPE_CHAT_USER_NAME){
+                this[CHAT_USER_USERNAME_SYMBOL] = message.data;
             }
         }
     }
@@ -53,7 +59,7 @@ class ChatUser {
     sendMessage(message) {
         if (this.webSocket.readyState === WebSocket.OPEN) {
             this.webSocket.send(JSON.stringify({
-                "type": 0,
+                "type": TYPE_CHAT_SERVER_MESSAGE,
                 "data": message
             }));
             return true;

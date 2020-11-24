@@ -8,58 +8,53 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="icon" type="image/png" href="images/Logo.png">
+    <link rel="stylesheet" href="layout.css">
     <link rel="stylesheet" href="style.css">
 
     <script type="text/javascript" src="ChatUser.js"></script>
+    <script type="text/javascript" src="render.js"></script>
+    <script type="text/javascript" src="userEvents.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </head>
 
 <body>
     <aside id="background">
-        <div id="logoHeader">
-            <img src="images/Logo.png" alt="message icon logo" id="logoImg">
-            <p id="logoTxt"> //Chat.server</p>
-        </div>
+        <img src="images/Logo.png" alt="message icon logo" id="logoImage">
+        <p id="logoText"> //Chat.server</p>
     </aside>
 
 
     <header id="login-screen">
-
-        <form id="login-window" onsubmit="return false">
-            <!-- Label not necessary -->
-            <label for="username">Username: </label>
-            <input id="username" name="username" placeholder="Username" />
-            <div>
-                <button onclick="join()">join</button>
-            </div>
+        <form onsubmit="return false">
+            <input id="usernameInput" name="usernameInput" placeholder="Username" />
+            <button onclick="join()">join</button>
         </form>
     </header>
 
     <main id="chat-screen">
-        <section id="column1users">
-            <div id="users"></div>
-        </section>
+        <section id="userlistWrapper">
+            <article id="userlist">
 
-
-        <section id="column2chat">
-            <article id="chat-box">
-                <div id="messages"></div>
             </article>
-
-            <form id="chat-input" onsubmit="return false">
-
-                <textarea id="message" type="text" placeholder="message" rows="4" cols="100"></textarea>
-                <div id="chat-util">
-                    <button onclick="sendMessage()">sendMessage</button>
-                    <button onclick="leave()">leave</button>
-                    <label for="chat-autoScroll">autoScroll</label>
-                    <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
-                </div>
-            </form>
         </section>
 
-        <aside id="column3iframes">
 
+        <section id="chat-box">
+        </section>
+
+        <form id="chat-input" onsubmit="return false">
+            <input id="textfield" type="text" placeholder="message" />
+            <button id="sendmessage" onclick="sendMessage()">&gt;</button>
+        </form>
+
+        <section id="userinfo"></section>
+
+        <aside id="additional">
+            <div id="chat-util">
+                <button onclick="leave()">leave</button>
+                <label for="chat-autoScroll">autoScroll</label>
+                <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
+            </div>
         </aside>
     </main>
 

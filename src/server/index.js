@@ -18,8 +18,15 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 const USER_NAME = Symbol("username");
-const USER_ID = Symbol("userid");
 const USER_CONNECTED = Symbol("userconnected");
+
+const TYPE_CHAT_USER_MESSAGE = 0;
+const TYPE_CHAT_USER_USERS = 1;
+const TYPE_CHAT_USER_CHAT_HISTORY = 2;
+const TYPE_CHAT_USER_NAME = 3;
+
+const TYPE_CHAT_SERVER_MESSAGE = 0;
+const TYPE_CHAT_SERVER_NAME_CHANGE = 1;
 
 let onlineUsers = [];
 
@@ -36,14 +43,14 @@ wss.on('connection', function (ws) {
   ws.on('message', function (obj) {
     let message = JSON.parse(obj);
 
-    if(message.type === 0){
+    if(message.type === TYPE_CHAT_SERVER_MESSAGE){
       let saveMessage = replaceToHTMLString("" + message.data);
 
       let date = new Date();
       let time = ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2);
 
       let json = JSON.stringify({
-        "type": 0,
+        "type": TYPE_CHAT_USER_MESSAGE,
         "data": saveMessage,
         "user": ws[USER_NAME],
         "time": time
@@ -55,19 +62,26 @@ wss.on('connection', function (ws) {
         client.send(json);
       });
       
-    }else if(message.type === 1){
+    }else if(message.type === TYPE_CHAT_SERVER_NAME_CHANGE){
       let username = replaceToHTMLString("" + message.data).trim();
       if(username.length !== 0 && validName(username)){
         ws[USER_NAME] = username;
+        ws.send(JSON.stringify({
+          "type": TYPE_CHAT_USER_NAME,
+          "data": ws[USER_NAME]
+        }));
       }
     }
   });
 
   let chatHistory = fs.readFileSync(chatFilePath, "utf-8");
   ws.send(JSON.stringify({
-    "type": 2,
-    "data": chatHistory,
-    "id": ws[USER_ID]
+    "type": TYPE_CHAT_USER_CHAT_HISTORY,
+    "data": chatHistory
+  }));
+  ws.send(JSON.stringify({
+    "type": TYPE_CHAT_USER_NAME,
+    "data": ws[USER_NAME]
   }));
 });
 
@@ -143,7 +157,7 @@ setInterval(function () {
   });
 
   let json = JSON.stringify({
-    "type": 1,
+    "type": TYPE_CHAT_USER_USERS,
     "data": onlineUsers.join("|")
   });
 

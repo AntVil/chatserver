@@ -1,275 +1,83 @@
+/*color, border, padding, ...*/
 /*variables*/
-
 :root {
-    --backgroundBackgroundColor: #ffffff00;
-    --textColor: #000000;
-    --login-screenBackgroundcolor: #4b4b4ba4;
-    --chat-messageBordercolor: #c0c0c0;
-    --chat-boxBackgroundcolor: #ffffff00;
-    --chat-messageBackgroundcolor: #ffffff;
-    --chat-metadata-nameColor: #0099FF;
-    --chat-metadata-timeColor: #00AA00;
-    --chat-textColor: #333333;
-    --usersBordercolor: #c0c0c0;
-    --usersBackgroundcolor: #e1e1e1;
-    --messagesBackgroundcolor: #ffffff00;
-    --buttonBordercolor: #c0c0c0;
-    --buttonBackgroundcolor: #e1e1e1;
-    --accent-color: rgba(3, 127, 209, 0.678);
+    --backgroundColor: #FFFFFF;
+    --userColor: #0099FF;
+    --ownColor: #FF9900;
+    --timeColor: #00AA00;
+    --messageColor: #000000;
+    --messageBackgroundcolor: rgba(0, 0, 0, 0.3);
+    --chatBackgroundcolor: rgba(0, 0, 0, 0.3);
+    --containerBackgroundcolor: rgba(0, 0, 0, 0.3);
+    --containerBordercolor: rgba(0, 0, 0, 0.5);
 }
 
-
 /*preferences*/
-
 @media (prefers-color-scheme: dark) {
-     :root {
-        --backgroundBackgroundColor: #000000;
-        --textColor: #ffffff;
-        --login-screenBackgroundcolor: #101dcf52;
-        --chat-messageBordercolor: #06149477;
-        --chat-messageBackgroundcolor: #3f3f3f;
-        --chat-metadata-nameColor: #0084ff;
-        --chat-metadata-timeColor: #a7a7a786;
-        --chat-textColor: #919191;
-        --usersBordercolor: #c0c0c0;
-        --usersBackgroundcolor: #e1e1e1;
-        --buttonBordercolor: #c0c0c0;
-        --buttonBackgroundcolor: #000000;
-        --accent-color: rgba(25, 195, 238, 0.651);
+    :root {
+        --backgroundColor: #1d1d1d;
+        --userColor: #0099FF;
+        --ownColor: #FF9900;
+        --timeColor: #00AA00;
+        --messageColor: #AAAAAA;
+        --messageBackgroundcolor: rgba(0, 0, 0, 0.3);
+        --chatBackgroundcolor: rgba(0, 0, 0, 0.3);
+        --containerBackgroundcolor: rgba(0, 0, 0, 0.3);
+        --containerBordercolor: rgba(0, 0, 0, 0.5);
     }
 }
 
-
-/*global standard values*/
-
-* {
-    font-family: Arial, Geneva, Tahoma, sans-serif;
-    color: var(--textColor);
-}
-
 #background {
-    transition: background-image 2s ease-in-out;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-color: var(--backgroundBackgroundColor);
+    background-color: var(--backgroundColor);
     background-image: url(./images/Bubbles.png);
     background-size: auto;
     background-repeat: no-repeat;
 }
 
-
-/* Logo section, responsive */
-
-#logoHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    height: 15%;
-    min-height: 65px;
-}
-
-#logoImg {
-    display: block;
-    height: 100%;
-    width: auto;
-    padding: 5px;
-}
-
-#logoTxt {
-    font-family: Courier New;
-    font-size: 3rem;
-    font-style: italic;
-    letter-spacing: 6px;
-}
-
-
-/*screens change appearance using javascript, when logged in*/
-
-#login-screen {
-    display: block;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    width: 45%;
-    transform: translate(-50%, -50%);
-    padding: 35px;
-    text-align: center;
-    font-size: large;
-}
-
-#login-screen #about {
-    display: none;
-    width: 55%;
-    margin: auto;
-    transform: translateY(-45%);
-    border-width: 1px;
-    border-style: solid;
-    border-image: linear-gradient( to bottom, var(--textColor), rgba(0, 0, 0, 0)) 0% 10;
-    font-size: small;
-}
-
-#login-screen #login-window {
-    background-color: var(--login-screenBackgroundcolor);
-    border-radius: 10px;
-    padding: 15px;
-}
-
-#login-screen label {
-    display: none;
-}
-
-#login-screen input {
-    transition: 0.8s ease;
-    width: 15%;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    text-align: inherit;
-}
-
-#login-screen input:hover {
-    transition: 0.6s ease;
-    width: 30%;
-}
-
-#login-screen input:focus {
-    width: 30%;
-    color: var(--chat-textColor);
-}
-
-#login-screen button {
-    transition: 0.3s ease;
-    padding: 12px;
-    width: 75%;
-    color: var(--buttonBackgroundcolor);
-    background-color: var(--textColor);
-    font-weight: bold;
-}
-
-#login-screen button:hover {
-    transition: 0.5s ease;
-    background-color: var(--accent-color);
-    cursor: pointer;
-}
-
-
-/*style for the chat screen (main)*/
-
-#chat-screen {
-    display: none;
-    justify-content: space-evenly;
-    /*padding: 5em;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    height: 720px;
-    width: 1280px;*/
-}
-
-#column1users {
-    display: block;
-}
-
-
-/*contains list of users*/
-
-#users {
-    border: 2px solid var(--usersBordercolor);
-    background-color: var(--usersBackgroundcolor);
-    border-radius: 5px;
+#login-screen{
     padding: 10px;
-    margin: 10px
-}
-
-.user-list{
-    padding: 2px;
+    border: 5px solid var(--containerBordercolor);
     border-radius: 5px;
-    border: 2px solid var(--usersBordercolor);
+    background-color: var(--containerBackgroundcolor);
 }
 
-#column2chat {
-    display: block;
+#userlist {
+    color: var(--userColor);
+    background-color: var(--containerBackgroundcolor);
+}
+
+#userinfo {
+    color: var(--ownColor);
 }
 
 #chat-box {
-    position: relative;
-    height: 85%;
-    overflow: auto;
-    background-color: var(--chat-boxBackgroundcolor);
-    padding: 10px;
-    margin: 10px
-}
-
-
-/*textarea for messages to be send*/
-
-#message {
-    /*disable textare resizing*/
-    position: relative;
-    resize: none;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-}
-
-#messages {
-    background-color: var(--messagesBackgroundcolor);
-    border-radius: 5px;
-    padding: 10px;
+    background-color: var(--chatBackgroundcolor);
 }
 
 .chat-message {
-    border: 2px solid var(--chat-messageBordercolor);
-    color: var(--chat-messageColor);
-    background-color: var(--chat-messageBackgroundcolor);
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
+    background-color: var(--messageBackgroundcolor);
 }
 
-.chat-metadata {
-    padding-bottom: 3px;
+.message-other {
+    color: var(--userColor);
 }
 
-.chat-metadata-name {
-    color: var(--chat-metadata-nameColor);
+.message-own {
+    color: var(--ownColor);
+}
+
+.chat-metadata{
+    padding: 5px;
+}
+
+.chat-metadata-name{
+    padding: 5px;
 }
 
 .chat-metadata-time {
-    color: var(--chat-metadata-timeColor);
+    color: var(--timeColor)
 }
 
 .chat-text {
-    color: var(--chat-textColor);
-}
-
-button {
-    transition: 0.25s ease-in-out;
-    border: 2px solid var(--buttonBordercolor);
-    color: var(--buttonColor);
-    background-color: var(--buttonBackgroundcolor);
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px
-}
-
-button:hover {
-    background-color: var(--accent-color);
-}
-
-#chat-util {
-    display: flex;
-}
-
-#column3iframes {
-    display: block;
-}
-
-#about {
-    display: none;
+    color: var(--messageColor)
 }
