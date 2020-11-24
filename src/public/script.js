@@ -1,6 +1,18 @@
 const OWN_MESSAGE_STYLE = "o";
 const OUTSIDER_MESSAGE_STYLE = "u";
 
+const emojis = {
+":&rpar;": "🙂",
+":D": "😃",
+":P": "😋",
+":&lpar;": "🙁",
+";&lpar;": "😢",
+";&rpar;": "😉",
+";P": "😜",
+"xD": "😆",
+"<3": "❤",
+"lmao": "🤣",
+};
 let user;
 
 let loginScreenElement;
@@ -58,7 +70,7 @@ function renderChat(messages) {
     for (let i = 0; i < messages.length; i++) {
         let name = messages[i].user;
         let time = messages[i].time;
-        let message = messages[i].data;
+        let message = emojiChanger(messages[i].data);
 
         let messageElement = document.createElement("div");
         let metaElement = document.createElement("div");
@@ -134,3 +146,9 @@ function leave() {
     loginScreenElement.style.display = "flex";
     chatScreenElement.style.display = "none";
 }
+function emojiChanger(input){
+        Object.keys(emojis).forEach(key =>{
+            input = input.replace(key,emojis[key]);
+        })
+    return input
+    }

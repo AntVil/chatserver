@@ -1,4 +1,5 @@
 {"type":0,"data":"Welcome to the Chat","user":"","time":""}
+<<<<<<< HEAD
 |{"type":0,"data":"Hwy","user":"Alex","time":"15:26"}
 |{"type":0,"data":"Hwy","user":"Alex","time":"15:26"}
 |{"type":0,"data":"hey","user":"Alex","time":"15:48"}
@@ -25,3 +26,8 @@
 |{"type":0,"data":"","user":"Alex","time":"16:00"}
 |{"type":0,"data":"","user":"Alex","time":"16:00"}
 |{"type":0,"data":"jdshkf","user":"Alex","time":"16:17"}
+=======
+|{"type":0,"data":"test","user":"test","time":"14:43"}
+|{"type":0,"data":"xD","user":"test","time":"15:29"}
+|{"type":0,"data":"lmao<br>","user":"<i>unknown1606228426392</i>","time":"15:33"}
+>>>>>>> 0ef6f184d28d47f5952aa8dee7c31738d6e1d359
