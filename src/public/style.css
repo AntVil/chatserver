@@ -47,6 +47,12 @@
     color: var(--textColor);
 }
 
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
 #background {
     transition: background-image 2s ease-in-out;
     position: fixed;
@@ -162,6 +168,8 @@
 #chat-screen {
     display: none;
     justify-content: space-evenly;
+    height: 95%;
+    margin: 0;
     /*padding: 5em;
     position: fixed;
     transform: translate(-50%, -50%);
@@ -186,23 +194,29 @@
     margin: 10px
 }
 
-.user-list{
+.user-list {
     padding: 2px;
     border-radius: 5px;
     border: 2px solid var(--usersBordercolor);
 }
 
 #column2chat {
-    display: block;
+    height: 75%;
+    width: 45%;
 }
 
 #chat-box {
     position: relative;
-    height: 85%;
     overflow: auto;
     background-color: var(--chat-boxBackgroundcolor);
     padding: 10px;
-    margin: 10px
+    margin: 10px;
+    height: 100%;
+}
+
+#chat-input {
+    position: fixed;
+    bottom: 0;
 }
 
 
@@ -260,10 +274,6 @@ button {
 
 button:hover {
     background-color: var(--accent-color);
-}
-
-#chat-util {
-    display: flex;
 }
 
 #column3iframes {

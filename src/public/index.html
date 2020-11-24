@@ -46,17 +46,19 @@
                 <div id="messages"></div>
             </article>
 
-            <form id="chat-input" onsubmit="return false">
 
-                <textarea id="message" type="text" placeholder="message" rows="4" cols="100"></textarea>
-                <div id="chat-util">
-                    <button onclick="sendMessage()">sendMessage</button>
-                    <button onclick="leave()">leave</button>
-                    <label for="chat-autoScroll">autoScroll</label>
-                    <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
-                </div>
-            </form>
         </section>
+
+        <form id="chat-input" onsubmit="return false">
+
+            <textarea id="message" type="text" placeholder="message" rows="4" cols="100"></textarea>
+            <div id="chat-util">
+                <button onclick="sendMessage()">sendMessage</button>
+                <button onclick="leave()">leave</button>
+                <label for="chat-autoScroll">autoScroll</label>
+                <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
+            </div>
+        </form>
 
         <aside id="column3iframes">
 

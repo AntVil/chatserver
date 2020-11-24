@@ -1,0 +1,27 @@
+{"type":0,"data":"Welcome to the Chat","user":"","time":""}
+|{"type":0,"data":"Hwy","user":"Alex","time":"15:26"}
+|{"type":0,"data":"Hwy","user":"Alex","time":"15:26"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"hey","user":"Alex","time":"15:48"}
+|{"type":0,"data":"","user":"Alex","time":"16:00"}
+|{"type":0,"data":"","user":"Alex","time":"16:00"}
+|{"type":0,"data":"","user":"Alex","time":"16:00"}
+|{"type":0,"data":"","user":"Alex","time":"16:00"}
+|{"type":0,"data":"","user":"Alex","time":"16:00"}
+|{"type":0,"data":"","user":"Alex","time":"16:00"}
+|{"type":0,"data":"","user":"Alex","time":"16:00"}
+|{"type":0,"data":"jdshkf","user":"Alex","time":"16:17"}
