@@ -1,3 +1,6 @@
+const OWN_MESSAGE_STYLE = "";
+const OUTSIDER_MESSAGE_STYLE = "";
+
 let user;
 
 let loginScreenElement;
@@ -10,7 +13,7 @@ let backgroundElement; //background animation in chat-screen
 
 let frame;
 
-window.onload = function() {
+window.onload = function () {
     user = null;
 
     loginScreenElement = document.getElementById("login-screen");
@@ -36,12 +39,13 @@ function loop() {
         let userList = user.getUsers();
         renderUsers(userList);
     }
+
     scrollText();
 
     frame++;
     requestAnimationFrame(loop);
 }
-function renderUsers(userList){
+function renderUsers(userList) {
     usersElement.innerHTML = "";
     for (let i = 0; i < userList.length; i++) {
         // usersElement.innerHTML += users[i] + "<br>";
@@ -51,7 +55,7 @@ function renderUsers(userList){
         usersElement.appendChild(userElement);
     }
 }
-function renderChat(messages){
+function renderChat(messages) {
     for (let i = 0; i < messages.length; i++) {
         let name = messages[i].user;
         let time = messages[i].time;
@@ -91,7 +95,7 @@ function scrollText() {
         lastScroll = scroll;
     });
     */
-    if (chatAutoScrollCheckbox.checked /*&& down*/ ) {
+    if (chatAutoScrollCheckbox.checked /*&& down*/) {
         chatBoxElement.scrollTop = chatBoxElement.scrollHeight;
     }
 }
