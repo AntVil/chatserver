@@ -1,0 +1,4 @@
+{"type":0,"data":"Welcome to the Chat","user":"","time":""}
+|{"type":0,"data":"test","user":"test","time":"14:43"}
+|{"type":0,"data":"xD","user":"test","time":"15:29"}
+|{"type":0,"data":"lmao<br>","user":"<i>unknown1606228426392</i>","time":"15:33"}
