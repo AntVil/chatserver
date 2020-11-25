@@ -46,8 +46,10 @@ class ChatUser {
         }
     }
 
-    getUsers() {
-        return this.webSocket[CHAT_USER_USERS_SYMBOL];
+    getUpdatedUsers() {
+        let users = this.webSocket[CHAT_USER_USERS_SYMBOL];
+        this.webSocket[CHAT_USER_USERS_SYMBOL] = [];
+        return users;
     }
 
     getNewMessages() {

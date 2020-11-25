@@ -1,169 +1,61 @@
+const constants = require("./constants");
+const globals = require("./globals");
+const toHTML = require("./htmlChar");
+const sendHelper = require("./sendHelper");
+
 const express = require('express');
-const path = require("path");
 const fs = require("fs");
 const http = require('http');
 const WebSocket = require('ws');
 
-const serverHeartBeat = 2000;
-const appPort = 2000;
-const serverPort = 2001;
-const publicFolderPath = path.join(__dirname, "/../", 'public');
-const chatFilePath = path.join(__dirname, "chat.txt");
-
 const app = express();
-app.use(express.static(publicFolderPath));
-
+app.use(express.static(constants.publicFolderPath));
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-const USER_NAME = Symbol("username");
-const USER_CONNECTED = Symbol("userconnected");
-
-const TYPE_CHAT_USER_MESSAGE = 0;
-const TYPE_CHAT_USER_USERS = 1;
-const TYPE_CHAT_USER_CHAT_HISTORY = 2;
-const TYPE_CHAT_USER_NAME = 3;
-
-const TYPE_CHAT_SERVER_MESSAGE = 0;
-const TYPE_CHAT_SERVER_NAME_CHANGE = 1;
-
-let onlineUsers = [];
 
 wss.on('connection', function (ws) {
-
-
-  ws[USER_NAME] = `<i>unknown${Date.now()}</i>`;
-  ws[USER_CONNECTED] = true;
-
-  ws.on('pong', function () {
-    ws[USER_CONNECTED] = true;
-  });
+  ws[constants.USER_NAME] = `<i>unknown${Date.now()}</i>`;
+  ws[constants.USER_CONNECTED] = true;
 
   ws.on('message', function (obj) {
     let message = JSON.parse(obj);
 
-    if(message.type === TYPE_CHAT_SERVER_MESSAGE){
-      let saveMessage = replaceToHTMLString("" + message.data);
+    if (message.type === constants.TYPE_CHAT_SERVER_MESSAGE) {
+      let saveMessage = toHTML.toHTML("" + message.data);
+      sendHelper.sendMessageAll(wss, saveMessage, ws[constants.USER_NAME], sendHelper.getTime());
 
-      let date = new Date();
-      let time = ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2);
-
-      let json = JSON.stringify({
-        "type": TYPE_CHAT_USER_MESSAGE,
-        "data": saveMessage,
-        "user": ws[USER_NAME],
-        "time": time
-      });
-
-      fs.appendFileSync(chatFilePath, "\n|" + json);
-
-      wss.clients.forEach(function(client) {
-        client.send(json);
-      });
-      
-    }else if(message.type === TYPE_CHAT_SERVER_NAME_CHANGE){
-      let username = replaceToHTMLString("" + message.data).trim();
-      if(username.length !== 0 && validName(username)){
-        ws[USER_NAME] = username;
-        ws.send(JSON.stringify({
-          "type": TYPE_CHAT_USER_NAME,
-          "data": ws[USER_NAME]
-        }));
+    } else if (message.type === constants.TYPE_CHAT_SERVER_NAME_CHANGE) {
+      let username = toHTML.toHTML("" + message.data);
+      if (username.length !== 0 && !globals.onlineUsers.includes(username)) {
+        ws[constants.USER_NAME] = username;
+        sendHelper.sendName(ws);
+        sendHelper.sendOnlineUsers(wss);
       }
     }
   });
 
-  let chatHistory = fs.readFileSync(chatFilePath, "utf-8");
-  ws.send(JSON.stringify({
-    "type": TYPE_CHAT_USER_CHAT_HISTORY,
-    "data": chatHistory
-  }));
-  ws.send(JSON.stringify({
-    "type": TYPE_CHAT_USER_NAME,
-    "data": ws[USER_NAME]
-  }));
+  ws.on('close', function (){
+    sendHelper.sendMessageAll(wss, `${ws[constants.USER_NAME]} left the chat`, "<i>server</i>", sendHelper.getTime());
+    sendHelper.sendOnlineUsers(wss);
+  });
+
+  sendHelper.sendChathistory(ws);
+  sendHelper.sendName(ws);
+  sendHelper.sendMessageAll(wss, `a new member joined the chat`, "<i>server</i>", sendHelper.getTime());
+  sendHelper.sendOnlineUsers(wss);
 });
 
 
-function replaceToHTMLString(str) {
-  let result = "";
-  for (let i = 0; i < str.length; i++) {
-    result += replaceToHTMLChar(str[i]);
+
+app.listen(constants.appPort, function () {
+  if (fs.readFileSync(constants.chatFilePath, "utf-8").trim().length === 0) {
+    fs.writeFileSync(constants.chatFilePath, `{"type":0,"data":"Welcome to the Chat","user":"<i>server</i>","time":"${sendHelper.getTime()}"}`);
   }
-  return result;
-}
-
-function replaceToHTMLChar(char) {
-  let specialChars = ["&", "<", ">", "#", "|", '"', "'", "´", "!", "\n", "{", "}", "(", ")", "[", "]"];
-  let specialCharDict = {
-    "&": "&amp",
-    "<": "&lt;",
-    ">": "&gt;",
-    "#": "&num;",
-    "|": "&vert;",
-    '"': "&quot",
-    "'": "&apos;",
-    "´": "&acute;",
-    "!": "&excl;",
-    "\n": "<br>",
-    "{": "&lbrace;", 
-    "}": "&rbrace;", 
-    "(": "&lpar;", 
-    ")": "&rpar;", 
-    "[": "&lbrack;", 
-    "]": "&rbrack;"
-
-  }
-  if (specialChars.includes(char)) {
-    return specialCharDict[char];
-  } else {
-    return char;
-  }
-}
-
-
-function validName(name){
-  return !onlineUsers.includes(name);
-}
-
-
-
-app.listen(appPort, function () {
-  if(fs.readFileSync(chatFilePath, "utf-8").trim().length === 0){
-    fs.writeFileSync(chatFilePath, `{"type":0,"data":"Welcome to the Chat","user":"","time":""}`);
-
-  }
-  console.log(`serving on port ${appPort}.`);
+  console.log(`serving on port ${constants.appPort}.`);
 });
 
-server.listen(serverPort, function() {
-  console.log(`serving on port ${serverPort}`);
+server.listen(constants.serverPort, function () {
+  console.log(`serving on port ${constants.serverPort}`);
 });
-
-
-setInterval(function () {
-  onlineUsers = [];
-
-  wss.clients.forEach(function(client) {
-    if (!client[USER_CONNECTED]) {
-      client.terminate();
-    }else{
-      onlineUsers.push(client[USER_NAME]);
-      //console.log(client[USER_NAME]);
-      client[USER_CONNECTED] = false;
-      client.ping(null, false, true);
-    }
-  });
-
-  let json = JSON.stringify({
-    "type": TYPE_CHAT_USER_USERS,
-    "data": onlineUsers.join("|")
-  });
-
-  
-  wss.clients.forEach(function(client) {
-    client.send(json);
-  });
-
-}, serverHeartBeat);

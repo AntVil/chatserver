@@ -25,6 +25,8 @@ function leave() {
 
     loginScreenContainer.style.display = LOGING_SCREEN_DISPLAY;
     chatScreenContainer.style.display = NO_DISPLAY;
+
+    clear();
 }
 
 function setupUI(){

@@ -24,17 +24,18 @@ function loop() {
     if (chatUser !== null){
         if(frame % 30 === 0) {
             let messages = chatUser.getNewMessages();
-            renderChat(messages);
+            if(messages.length !== 0){
+                renderChat(messages);
+            }
     
-            let userList = chatUser.getUsers();
-            renderUsers(userList);
+            let userList = chatUser.getUpdatedUsers();
+            if(userList.length !== 0){
+                renderUsers(userList);
+            }
         }
-
         scrollText();
         renderUserinfo();
     }
-
-    
 
     frame++;
     requestAnimationFrame(loop);
@@ -51,6 +52,3 @@ function setupContainers(){
 
     setupScrollEvent();
 }
-
-
-

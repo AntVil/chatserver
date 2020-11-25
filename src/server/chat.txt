@@ -1,49 +1,16 @@
-{"type":0,"data":"Welcome to the Chat","user":"","time":""}
-|{"type":0,"data":"anton","user":"<i>unknown1606223154061</i>","time":"14:06"}
-|{"type":0,"data":"anton","user":"<i>unknown1606223154061</i>","time":"14:06"}
-|{"type":0,"data":"anton","user":"<i>unknown1606223154061</i>","time":"14:06"}
-|{"type":0,"data":"123","user":"<i>unknown1606223391730</i>","time":"14:09"}
-|{"type":0,"data":"","user":"123","time":"14:11"}
-|{"type":0,"data":"","user":"123","time":"14:11"}
-|{"type":0,"data":"123","user":"123","time":"14:11"}
-|{"type":0,"data":"123123","user":"123","time":"14:14"}
-|{"type":0,"data":"123123","user":"123","time":"14:14"}
-|{"type":0,"data":"123123","user":"123","time":"14:14"}
-|{"type":0,"data":"123123","user":"123","time":"14:14"}
-|{"type":0,"data":"123123","user":"123","time":"14:14"}
-|{"type":0,"data":"123123","user":"123","time":"14:14"}
-|{"type":0,"data":"123123","user":"123","time":"14:14"}
-|{"type":0,"data":"123123","user":"123","time":"14:14"}
-|{"type":0,"data":"123123","user":"123","time":"14:14"}
-|{"type":0,"data":"123","user":"<i>unknown1606237317261</i>","time":"18:01"}
-|{"type":0,"data":"123","user":"<i>unknown1606237317261</i>","time":"18:02"}
-|{"type":0,"data":"123","user":"<i>unknown1606237807151</i>","time":"18:10"}
-|{"type":0,"data":"123","user":"<i>unknown1606237807151</i>","time":"18:10"}
-|{"type":0,"data":"g","user":"123","time":"18:15"}
-|{"type":0,"data":"123","user":"123","time":"18:22"}
-|{"type":0,"data":"123","user":"123","time":"18:22"}
-|{"type":0,"data":"123","user":"123","time":"18:22"}
-|{"type":0,"data":"123","user":"123","time":"18:22"}
-|{"type":0,"data":"123","user":"<i>unknown1606254345789</i>","time":"22:46"}
-|{"type":0,"data":"123","user":"<i>unknown1606254345789</i>","time":"22:46"}
-|{"type":0,"data":"123","user":"<i>unknown1606255296030</i>","time":"23:01"}
-|{"type":0,"data":"123","user":"<i>unknown1606255296030</i>","time":"23:02"}
-|{"type":0,"data":"123","user":"<i>unknown1606256258252</i>","time":"23:17"}
-|{"type":0,"data":"123","user":"<i>unknown1606256258252</i>","time":"23:17"}
-|{"type":0,"data":"123","user":"<i>unknown1606256274025</i>","time":"23:17"}
-|{"type":0,"data":"123","user":"<i>unknown1606256549657</i>","time":"23:22"}
-|{"type":0,"data":"123","user":"<i>unknown1606256549657</i>","time":"23:22"}
-|{"type":0,"data":"123","user":"<i>unknown1606256583620</i>","time":"23:23"}
-|{"type":0,"data":"","user":"<i>unknown1606257359357</i>","time":"23:36"}
-|{"type":0,"data":"1","user":"123","time":"23:36"}
-|{"type":0,"data":"","user":"123","time":"23:36"}
-|{"type":0,"data":"123","user":"<i>unknown1606257700163</i>","time":"23:41"}
-|{"type":0,"data":"123","user":"123","time":"23:41"}
-|{"type":0,"data":"","user":"123","time":"23:41"}
-|{"type":0,"data":"","user":"123","time":"23:42"}
-|{"type":0,"data":"","user":"123","time":"23:42"}
-|{"type":0,"data":"","user":"123","time":"23:42"}
-|{"type":0,"data":"1","user":"123","time":"23:42"}
-|{"type":0,"data":"","user":"123","time":"23:44"}
-|{"type":0,"data":"123","user":"<i>unknown1606258009832</i>","time":"23:47"}
-|{"type":0,"data":"123","user":"<i>unknown1606258047681</i>","time":"23:48"}
+{"type":0,"data":"Welcome to the Chat","user":"<i>server</i>","time":"16:14"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:14"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:14"}
+|{"type":0,"data":"2 left the chat","user":"<i>server</i>","time":"16:15"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:15"}
+|{"type":0,"data":"123","user":"1","time":"16:15"}
+|{"type":0,"data":"1 left the chat","user":"<i>server</i>","time":"16:15"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:15"}
+|{"type":0,"data":"1 left the chat","user":"<i>server</i>","time":"16:15"}
+|{"type":0,"data":"2 left the chat","user":"<i>server</i>","time":"16:15"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:15"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:15"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:20"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:20"}
+|{"type":0,"data":"2 left the chat","user":"<i>server</i>","time":"16:21"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:21"}

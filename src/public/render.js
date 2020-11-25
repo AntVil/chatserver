@@ -45,6 +45,11 @@ function renderChat(messages) {
     }
 }
 
+function clear(){
+    chatContainer.innerHTML = "";
+    userlistContainer.innerHTML = "";
+}
+
 function renderUserinfo(){
     let userInfo = document.getElementById("userinfo");
     let username = chatUser.getUsername();

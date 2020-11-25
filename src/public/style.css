@@ -34,6 +34,18 @@
     background-repeat: no-repeat;
 }
 
+#logoImage {
+    height: 30%;
+    width: auto;
+}
+
+#logoText {
+    font-family: Courier New;
+    font-size: 3rem;
+    font-style: italic;
+    letter-spacing: 6px;
+}
+
 #login-screen{
     padding: 10px;
     border: 5px solid var(--containerBordercolor);
