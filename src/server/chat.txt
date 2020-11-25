@@ -14,3 +14,5 @@
 |{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:20"}
 |{"type":0,"data":"2 left the chat","user":"<i>server</i>","time":"16:21"}
 |{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:21"}
+|{"type":0,"data":"Test","user":"<i>unknown1606317853309</i>","time":"16:24"}
+|{"type":0,"data":"ert.rlhpf","user":"<i>unknown1606318197095</i>","time":"16:30"}
