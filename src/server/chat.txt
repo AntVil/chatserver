@@ -1,18 +1,6 @@
 {"type":0,"data":"Welcome to the Chat","user":"<i>server</i>","time":"16:14"}
-|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:14"}
-|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:14"}
-|{"type":0,"data":"2 left the chat","user":"<i>server</i>","time":"16:15"}
-|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:15"}
-|{"type":0,"data":"123","user":"1","time":"16:15"}
-|{"type":0,"data":"1 left the chat","user":"<i>server</i>","time":"16:15"}
-|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:15"}
-|{"type":0,"data":"1 left the chat","user":"<i>server</i>","time":"16:15"}
-|{"type":0,"data":"2 left the chat","user":"<i>server</i>","time":"16:15"}
-|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:15"}
-|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:15"}
-|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:20"}
-|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:20"}
-|{"type":0,"data":"2 left the chat","user":"<i>server</i>","time":"16:21"}
-|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"16:21"}
-|{"type":0,"data":"Test","user":"<i>unknown1606317853309</i>","time":"16:24"}
-|{"type":0,"data":"ert.rlhpf","user":"<i>unknown1606318197095</i>","time":"16:30"}
+|{"type":0,"data":"test left the chat","user":"<i>server</i>","time":"10:03"}
+|{"type":0,"data":"test left the chat","user":"<i>server</i>","time":"11:49"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"11:49"}
+|{"type":0,"data":"test","user":"test","time":"11:49"}
+|{"type":0,"data":"<i>unknown1606470400579</i> left the chat","user":"<i>server</i>","time":"11:49"}

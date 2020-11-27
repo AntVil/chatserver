@@ -131,7 +131,11 @@ body {
     }
 }
 
-
+#chat-util{
+  position: absolute;
+  bottom: 0;
+  right: 2%;
+}
 
 #about {
     display: none;
