@@ -1,7 +1,15 @@
 const constants = require("./constants");
-const globals = require("./globals");
 
 const fs = require("fs");
+
+
+function validName(wss, username){
+    let users = [];
+    wss.clients.forEach(function(user){
+        users.push(user[constants.USER_NAME]);
+    });
+    return !users.includes(username);
+}
 
 
 function sendOnlineUsers(wss) {
@@ -64,3 +72,4 @@ exports.sendMessageAll = sendMessageAll;
 exports.getTime = getTime;
 exports.sendChathistory = sendChathistory;
 exports.sendName = sendName;
+exports.validName = validName;

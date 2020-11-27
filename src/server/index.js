@@ -1,5 +1,4 @@
 const constants = require("./constants");
-const globals = require("./globals");
 const toHTML = require("./htmlChar");
 const sendHelper = require("./sendHelper");
 
@@ -28,7 +27,7 @@ wss.on('connection', function (ws) {
 
     } else if (message.type === constants.TYPE_CHAT_SERVER_NAME_CHANGE) {
       let username = toHTML.toHTML("" + message.data);
-      if (username.length !== 0 && !globals.onlineUsers.includes(username)) {
+      if (username.length !== 0 && sendHelper.validName(wss, username)) {
         ws[constants.USER_NAME] = username;
         sendHelper.sendName(ws);
         sendHelper.sendOnlineUsers(wss);
