@@ -3,7 +3,7 @@ const OUTSIDER_MESSAGE_STYLE = "message-other";
 const SERVER_MESSAGE_STYLE = "message-server";
 
 function renderUsers(userList) {
-    userlistContainer.innerHTML = "";
+    userlistContainer.innerHTML = "Online Users";
     for (let i = 0; i < userList.length; i++) {
         let user = document.createElement("div");
         user.innerHTML = userList[i];
@@ -19,8 +19,8 @@ function renderChat(messages) {
 
         let messageContainer = document.createElement("div");
         let metaContainer = document.createElement("div");
-        let metaNameContainer = document.createElement("p");
-        let metaTimeContainer = document.createElement("p");
+        let metaNameContainer = document.createElement("span");
+        let metaTimeContainer = document.createElement("span");
         let textContainer = document.createElement("p");
 
         messageContainer.classList.add('chat-message');
@@ -36,11 +36,11 @@ function renderChat(messages) {
         metaTimeContainer.innerHTML = time;
         textContainer.innerHTML = message;
 
-        if(name === chatUser.getUsername()){
+        if (name === chatUser.getUsername()) {
             messageContainer.classList.add(OWN_MESSAGE_STYLE);
-        }else if(name === chatUser.getServername()){
+        } else if (name === chatUser.getServername()) {
             messageContainer.classList.add(SERVER_MESSAGE_STYLE);
-        }else{
+        } else {
             messageContainer.classList.add(OUTSIDER_MESSAGE_STYLE);
         }
 
@@ -48,15 +48,15 @@ function renderChat(messages) {
     }
 }
 
-function clear(){
+function clear() {
     chatContainer.innerHTML = "";
     userlistContainer.innerHTML = "";
 }
 
-function renderUserinfo(){
+function renderUserinfo() {
     let userInfo = document.getElementById("userinfo");
     let username = chatUser.getUsername();
-    if(userInfo.innerHTML !== username){
+    if (userInfo.innerHTML !== username) {
         userInfo.innerHTML = username;
     }
 }
