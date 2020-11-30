@@ -13,10 +13,10 @@ const emojis = {
     "xD": "😆",
     "&lt;3": "❤",
     "lmao": "🤣",
-    };
+};
 
 function renderUsers(userList) {
-    userlistContainer.innerHTML = "";
+    userlistContainer.innerHTML = "Online Users";
     for (let i = 0; i < userList.length; i++) {
         let user = document.createElement("div");
         user.innerHTML = userList[i];
@@ -32,8 +32,8 @@ function renderChat(messages) {
 
         let messageContainer = document.createElement("div");
         let metaContainer = document.createElement("div");
-        let metaNameContainer = document.createElement("p");
-        let metaTimeContainer = document.createElement("p");
+        let metaNameContainer = document.createElement("span");
+        let metaTimeContainer = document.createElement("span");
         let textContainer = document.createElement("p");
 
         messageContainer.classList.add('chat-message');
@@ -83,5 +83,5 @@ function emojiChanger(input){
     Object.keys(emojis).forEach(key =>{
         input = input.replace(key,emojis[key]);
     })
-return input
+    return input
 }
