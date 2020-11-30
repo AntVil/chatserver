@@ -17,6 +17,10 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function (ws) {
     ws.on('message', function (obj) {
         let message = JSON.parse(obj);
+        message.data = message.data.trim();
+        if(message.data.length === 0){
+            return;
+        }
 
         if (message.type === constants.TYPE_CHAT_SERVER_MESSAGE) {
             let saveMessage = toHTML.toHTML("" + message.data);

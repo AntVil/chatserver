@@ -15,6 +15,7 @@ const emojis = {
     "lmao": "🤣",
 };
 
+
 function renderUsers(userList) {
     userlistContainer.innerHTML = "Online Users";
     for (let i = 0; i < userList.length; i++) {
@@ -28,7 +29,7 @@ function renderChat(messages) {
     for (let i = 0; i < messages.length; i++) {
         let name = messages[i].user;
         let time = messages[i].time;
-        let message = emojiChanger(messages[i].data);
+        let message = messages[i].data;
 
         let messageContainer = document.createElement("div");
         let metaContainer = document.createElement("div");
@@ -47,13 +48,13 @@ function renderChat(messages) {
 
         metaNameContainer.innerHTML = name;
         metaTimeContainer.innerHTML = time;
-        textContainer.innerHTML = message;
+        textContainer.innerHTML = replaceEmojis(message);
 
-        if(name === chatUser.getUsername()){
+        if (name === chatUser.getUsername()) {
             messageContainer.classList.add(OWN_MESSAGE_STYLE);
-        }else if(name === chatUser.getServername()){
+        } else if (name === chatUser.getServername()) {
             messageContainer.classList.add(SERVER_MESSAGE_STYLE);
-        }else{
+        } else {
             messageContainer.classList.add(OUTSIDER_MESSAGE_STYLE);
         }
 
@@ -61,14 +62,14 @@ function renderChat(messages) {
     }
 }
 
-function clear(){
+function clearChat() {
     chatContainer.innerHTML = "";
     userlistContainer.innerHTML = "";
 }
 
-function renderUserinfo(){
+function renderUserinfo() {
     let username = chatUser.getUsername();
-    if(userInfoContainer.innerHTML !== username){
+    if (userInfoContainer.innerHTML !== username) {
         userInfoContainer.innerHTML = username;
     }
 }
@@ -79,9 +80,9 @@ function scrollText() {
     }
 }
 
-function emojiChanger(input){
-    Object.keys(emojis).forEach(key =>{
-        input = input.replace(key,emojis[key]);
+function replaceEmojis(input) {
+    Object.keys(emojis).forEach(key => {
+        input = input.replace(key, emojis[key]);
     })
     return input
 }

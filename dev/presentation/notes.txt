@@ -4,14 +4,11 @@
 -chat (frontend + backend)
 
 #design choices:
--constant requests to stay logged in (prevent people being in list of online users)
-    -> constant request is hard to do and unneccecary
-    -> people are logged of after inactivity and instatnly reconnected once the page reloads
-    -> user doesn't notice, being logged of
-    -> feature online "truly" active people are visable in user list
+-2 web server
+    -> split webpage and chat application (api possible)
+    -> express takes care of webpage content
 
 #problems:
--storing messages -> to text-document with seperation characters
+-storing messages -> to text-document with seperation characters (\n)
 -special html characters in messages -> replacing with HTML encodings
--keeping track of active users -> design choice
 -too many messages make chat less readable -> autoScroll

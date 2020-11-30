@@ -1,22 +1,24 @@
 let chatUser;
 
 let loginScreenContainer;
-let usernameContainer
 let chatScreenContainer;
 
 let userlistContainer;
 let chatContainer;
+let userInfoContainer;
+let usernameContainer;
+
 let autoScrollContainer;
-let userInfoContainer
-let textfieldContainer
+let textfieldContainer;
 
 let frame;
+
 
 window.onload = function () {
     chatUser = null;
 
     setupContainers();
-    
+
     setupUI();
 
     frame = 0;
@@ -24,15 +26,15 @@ window.onload = function () {
 }
 
 function loop() {
-    if (chatUser !== null){
-        if(frame % 30 === 0) {
+    if (chatUser !== null) {
+        if (frame % 30 === 0) {
             let messages = chatUser.getNewMessages();
-            if(messages.length !== 0){
+            if (messages.length !== 0) {
                 renderChat(messages);
             }
-    
+
             let userList = chatUser.getUpdatedUsers();
-            if(userList.length !== 0){
+            if (userList.length !== 0) {
                 renderUsers(userList);
             }
         }
@@ -45,15 +47,16 @@ function loop() {
 }
 
 
-function setupContainers(){
+function setupContainers() {
     loginScreenContainer = document.getElementById("login-screen");
-    usernameContainer = document.getElementById("usernameInput")
     chatScreenContainer = document.getElementById("chat-screen");
 
     userlistContainer = document.getElementById("userlist");
     chatContainer = document.getElementById("chat-box");
-    autoScrollContainer = document.getElementById("chat-autoScroll");
+    usernameContainer = document.getElementById("usernameInput");
     userInfoContainer = document.getElementById("userinfo");
+    
+    autoScrollContainer = document.getElementById("chat-autoScroll");
     textfieldContainer = document.getElementById("textfield");
 
     setupScrollEvent();
