@@ -1,12 +1,15 @@
 const CHAT_SCREEN_DISPLAY = "grid";
 const LOGING_SCREEN_DISPLAY = "block";
 const NO_DISPLAY = "none";
+const HOST = window.location.host;
+let WSHOST;
 
 let scrolled;
 
 function join() {
     let username = document.getElementById("usernameInput").value;
-    chatUser = new ChatUser(username, "ws://localhost:2001/");
+    WSHOST  = HOST.replace("2000","2001");
+    chatUser = new ChatUser(username, `ws://${WSHOST}/ws`);
 
     loginScreenContainer.style.display = NO_DISPLAY;
     chatScreenContainer.style.display = CHAT_SCREEN_DISPLAY;
