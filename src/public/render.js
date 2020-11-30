@@ -54,10 +54,9 @@ function clear(){
 }
 
 function renderUserinfo(){
-    let userInfo = document.getElementById("userinfo");
     let username = chatUser.getUsername();
-    if(userInfo.innerHTML !== username){
-        userInfo.innerHTML = username;
+    if(userInfoContainer.innerHTML !== username){
+        userInfoContainer.innerHTML = username;
     }
 }
 

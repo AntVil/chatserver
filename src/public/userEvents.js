@@ -1,14 +1,16 @@
 const CHAT_SCREEN_DISPLAY = "grid";
 const LOGING_SCREEN_DISPLAY = "block";
 const NO_DISPLAY = "none";
+const PORT = "2000";
+const PORTREPLACE = "2001";
 const HOST = window.location.host;
 let WSHOST;
 
 let scrolled;
 
 function join() {
-    let username = document.getElementById("usernameInput").value;
-    WSHOST  = HOST.replace("2000","2001");
+    let username = usernameContainer.value;
+    WSHOST  = HOST.replace(PORT,PORTREPLACE);
     chatUser = new ChatUser(username, `ws://${WSHOST}/ws`);
 
     loginScreenContainer.style.display = NO_DISPLAY;
@@ -16,9 +18,8 @@ function join() {
 }
 
 function sendMessage() {
-    let textfield = document.getElementById("textfield");
-    let message = textfield.value;
-    textfield.value = "";
+    let message = textfieldContainer.value;
+    textfieldContainer.value = "";
     chatUser.sendMessage(message);
 }
 

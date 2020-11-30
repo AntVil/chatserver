@@ -1,11 +1,14 @@
 let chatUser;
 
 let loginScreenContainer;
+let usernameContainer
 let chatScreenContainer;
 
 let userlistContainer;
 let chatContainer;
 let autoScrollContainer;
+let userInfoContainer
+let textfieldContainer
 
 let frame;
 
@@ -44,11 +47,14 @@ function loop() {
 
 function setupContainers(){
     loginScreenContainer = document.getElementById("login-screen");
+    usernameContainer = document.getElementById("usernameInput")
     chatScreenContainer = document.getElementById("chat-screen");
 
     userlistContainer = document.getElementById("userlist");
     chatContainer = document.getElementById("chat-box");
     autoScrollContainer = document.getElementById("chat-autoScroll");
+    userInfoContainer = document.getElementById("userinfo");
+    textfieldContainer = document.getElementById("textfield");
 
     setupScrollEvent();
 }
