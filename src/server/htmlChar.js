@@ -1,7 +1,7 @@
 function replaceToHTMLString(str) {
     let result = "";
     for (let i = 0; i < str.length; i++) {
-        result += replaceToHTMLChar(str[i]);
+        result += replaceToHTMLChar(str.charAt(i));
     }
     return result.trim();
 }
@@ -33,5 +33,6 @@ function replaceToHTMLChar(char) {
         return char;
     }
 }
+
 
 exports.toHTML = replaceToHTMLString;

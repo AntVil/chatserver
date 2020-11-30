@@ -1,11 +1,13 @@
 const path = require("path");
 
-exports.serverHeartBeat = 2000;
-exports.appPort = 2000;
-exports.serverPort = 2001;
 
-exports.USER_NAME = Symbol("username");
-exports.USER_CONNECTED = Symbol("userconnected");
+exports.WEBPAGE_PORT = 2000;
+exports.WEBSOCKET_PORT = 2001;
+exports.HOST_NAME = "0.0.0.0";
+
+exports.SERVER_NAME = "<i>server</i>";
+
+exports.USER_NAME_SYMBOL = Symbol("username");
 
 exports.TYPE_CHAT_USER_MESSAGE = 0;
 exports.TYPE_CHAT_USER_USERS = 1;
@@ -15,5 +17,5 @@ exports.TYPE_CHAT_USER_NAME = 3;
 exports.TYPE_CHAT_SERVER_MESSAGE = 0;
 exports.TYPE_CHAT_SERVER_NAME_CHANGE = 1;
 
-exports.publicFolderPath = path.join(__dirname, "/../", 'public');
-exports.chatFilePath = path.join(__dirname, "chat.txt");
+exports.PUBLIC_FOLDER_PATH = path.join(__dirname, "/../", 'public');
+exports.CHAT_FILE_PATH = path.join(__dirname, "chat.txt");
