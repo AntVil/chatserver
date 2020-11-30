@@ -2,8 +2,21 @@ const OWN_MESSAGE_STYLE = "message-own";
 const OUTSIDER_MESSAGE_STYLE = "message-other";
 const SERVER_MESSAGE_STYLE = "message-server";
 
+const emojis = {
+    ":&rpar;": "🙂",
+    ":D": "😃",
+    ":P": "😋",
+    ":&lpar;": "🙁",
+    ";&lpar;": "😢",
+    ";&rpar;": "😉",
+    ";P": "😜",
+    "xD": "😆",
+    "&lt;3": "❤",
+    "lmao": "🤣",
+    };
+
 function renderUsers(userList) {
-    userlistContainer.innerHTML = "Online Users";
+    userlistContainer.innerHTML = "";
     for (let i = 0; i < userList.length; i++) {
         let user = document.createElement("div");
         user.innerHTML = userList[i];
@@ -15,12 +28,12 @@ function renderChat(messages) {
     for (let i = 0; i < messages.length; i++) {
         let name = messages[i].user;
         let time = messages[i].time;
-        let message = messages[i].data;
+        let message = emojiChanger(messages[i].data);
 
         let messageContainer = document.createElement("div");
         let metaContainer = document.createElement("div");
-        let metaNameContainer = document.createElement("span");
-        let metaTimeContainer = document.createElement("span");
+        let metaNameContainer = document.createElement("p");
+        let metaTimeContainer = document.createElement("p");
         let textContainer = document.createElement("p");
 
         messageContainer.classList.add('chat-message');
@@ -36,11 +49,11 @@ function renderChat(messages) {
         metaTimeContainer.innerHTML = time;
         textContainer.innerHTML = message;
 
-        if (name === chatUser.getUsername()) {
+        if(name === chatUser.getUsername()){
             messageContainer.classList.add(OWN_MESSAGE_STYLE);
-        } else if (name === chatUser.getServername()) {
+        }else if(name === chatUser.getServername()){
             messageContainer.classList.add(SERVER_MESSAGE_STYLE);
-        } else {
+        }else{
             messageContainer.classList.add(OUTSIDER_MESSAGE_STYLE);
         }
 
@@ -48,16 +61,15 @@ function renderChat(messages) {
     }
 }
 
-function clear() {
+function clear(){
     chatContainer.innerHTML = "";
     userlistContainer.innerHTML = "";
 }
 
-function renderUserinfo() {
-    let userInfo = document.getElementById("userinfo");
+function renderUserinfo(){
     let username = chatUser.getUsername();
-    if (userInfo.innerHTML !== username) {
-        userInfo.innerHTML = username;
+    if(userInfoContainer.innerHTML !== username){
+        userInfoContainer.innerHTML = username;
     }
 }
 
@@ -65,4 +77,11 @@ function scrollText() {
     if (autoScrollContainer.checked) {
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
+}
+
+function emojiChanger(input){
+    Object.keys(emojis).forEach(key =>{
+        input = input.replace(key,emojis[key]);
+    })
+return input
 }
