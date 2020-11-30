@@ -56,9 +56,82 @@ body {
 
 /*mobile*/
 
-@media only screen and (max-width: 500px) {
-    /*unfinished*/
+@media only screen and (max-width: 689px) {
+    main {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 0px auto 0px;
+        grid-template-rows: 50px 50px auto 50px;
+    }
+    #userlistWrapper {
+        grid-column-start: 1;
+        grid-column-end: span 1;
+        grid-row-start: 2;
+        grid-row-end: span 3;
+        text-align: center;
+        overflow: auto;
+    }
+    #chat-box {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 2;
+        grid-row-end: span 2;
+        overflow: auto;
+    }
+    #chat-input {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 4;
+        grid-row-end: span 1;
+        display: grid;
+        grid-template-columns: auto 30px;
+        grid-template-rows: auto;
+    }
+    #userinfo {
+        grid-column-start: 3;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+    }
+    #additional {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+        overflow: auto;
+    }
+    #userlist {
+        position: relative;
+        top: 60%;
+        transform: translate(0, -50%);
+    }
+    .chat-message {
+        width: 85%;
+        margin: 5px;
+    }
+    .message-other {
+        color: var(--userColor);
+        margin-left: 0;
+        margin-right: auto;
+    }
+    .message-own {
+        color: var(--ownColor);
+        margin-left: auto;
+        margin-right: 0;
+    }
+    #chat-util {
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
 }
+
+
+
 
 
 /*pc*/
@@ -131,13 +204,13 @@ body {
         margin-left: auto;
         margin-right: 0;
     }
+    #chat-util {
+        position: absolute;
+        bottom: 0;
+        right: 2%;
+    }
 }
 
-#chat-util {
-    position: absolute;
-    bottom: 0;
-    right: 2%;
-}
 
 #about {
     display: none;
