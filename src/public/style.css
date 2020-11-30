@@ -52,6 +52,10 @@
     }
 }
 
+* {
+    font-family: Helvetica, sans-serif;
+}
+
 #background {
     background-color: var(--backgroundColor);
     background-image: url(./images/Bubbles.png);
@@ -92,7 +96,6 @@
 
 #userlistWrapper {
     background-color: var(--chatBackgroundcolor);
-    font-family: Helvetica, sans-serif;
     color: var(--userListcolor);
 }
 
@@ -103,10 +106,9 @@
     background-color: var(--buttonBackgroundcolor);
     font-size: large;
     font-weight: bold;
-    font-family: Helvetica, sans-serif;
     height: 30%;
     overflow: auto;
-    margin-right: 5px;
+    margin: 5px;
 }
 
 #userlist>div {
@@ -116,7 +118,6 @@
 #userinfo {
     color: var(--userInfocolor);
     background-color: var(--chatBackgroundcolor);
-    font-family: Helvetica, sans-serif;
     font-size: large;
     font-weight: bolder;
 }
@@ -155,17 +156,16 @@
     border: 2px solid var(--containerBordercolor);
     border-radius: 2px;
     background-color: var(--containerBackgroundcolor);
-    font-family: Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
     color: var(--chatInputcolor);
+    resize: both;
 }
 
 #chat-input input:focus {
     border: 2px solid var(--containerBordercolor);
     border-radius: 2px;
     background-color: var(--containerBackgroundcolor);
-    font-family: Helvetica, sans-serif;
     font-weight: bold;
     text-align: left;
 }
@@ -181,7 +181,6 @@
 }
 
 .chat-metadata-name {
-    font-family: Helvetica, sans-serif;
     font-weight: bold;
     padding: 5px;
     margin: 0;
@@ -190,11 +189,13 @@
 .chat-metadata-time {
     color: var(--timeColor);
     margin: 0;
+    font-size: smaller;
+    border: 1px solid var(--containerBordercolor);
+    border-radius: 5px;
 }
 
 .chat-text {
     color: var(--messageColor);
-    font-family: Helvetica, sans-serif;
     font-size: large;
     padding-left: 20px;
     margin: 0;
@@ -208,7 +209,6 @@
     border: 2px solid var(--containerBordercolor);
     border-radius: 2px;
     background-color: var(--containerBackgroundcolor);
-    font-family: Helvetica, sans-serif;
     font-weight: bold;
 }
 
@@ -224,7 +224,6 @@ input[type="checkbox"]+label {
     position: relative;
     display: inline-flex;
     cursor: pointer;
-    font-family: Helvetica, sans-serif;
     /*font-size: 24px;*/
     line-height: 1.3;
     color: var(--userListcolor);
