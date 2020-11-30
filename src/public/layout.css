@@ -13,7 +13,7 @@ body {
     z-index: -1;
 }
 
-#login-screen{
+#login-screen {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -36,7 +36,7 @@ body {
     width: 80%;
 }
 
-#login-screen input:hover{
+#login-screen input:hover {
     transition: 0.6s ease;
     width: 80%;
 }
@@ -52,12 +52,17 @@ body {
 #login-screen button:hover {
     transition: 0.5s ease;
 }
+
+
 /*mobile*/
+
 @media only screen and (max-width: 500px) {
     /*unfinished*/
 }
 
+
 /*pc*/
+
 @media only screen and (min-width: 690px) {
     main {
         position: fixed;
@@ -68,7 +73,7 @@ body {
         display: grid;
         grid-template-columns: 250px auto 200px;
         grid-template-rows: 50px auto 50px;
-        gap: 5px;   
+        gap: 5px;
     }
     #userlistWrapper {
         grid-column-start: 1;
@@ -107,24 +112,20 @@ body {
         grid-row-end: span 2;
         overflow: auto;
     }
-
-    #userlist{
+    #userlist {
         position: relative;
-        top: 50%;
+        top: 60%;
         transform: translate(0, -50%);
     }
-
-    .chat-message{
+    .chat-message {
         width: 85%;
         margin: 5px;
     }
-    
     .message-other {
         color: var(--userColor);
         margin-left: 0;
         margin-right: auto;
     }
-    
     .message-own {
         color: var(--ownColor);
         margin-left: auto;
@@ -132,10 +133,10 @@ body {
     }
 }
 
-#chat-util{
-  position: absolute;
-  bottom: 0;
-  right: 2%;
+#chat-util {
+    position: absolute;
+    bottom: 0;
+    right: 2%;
 }
 
 #about {
