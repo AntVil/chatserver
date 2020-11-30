@@ -82,3 +82,9 @@
 |{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"13:22"}
 |{"type":0,"data":"test left the chat","user":"<i>server</i>","time":"13:25"}
 |{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"13:25"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"10:34"}
+|{"type":0,"data":"2","user":"123","time":"10:34"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"10:34"}
+|{"type":0,"data":"23","user":"2","time":"10:34"}
+|{"type":0,"data":"123 left the chat","user":"<i>server</i>","time":"10:35"}
+|{"type":0,"data":"a new member joined the chat","user":"<i>server</i>","time":"10:35"}

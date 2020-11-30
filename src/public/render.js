@@ -1,5 +1,6 @@
 const OWN_MESSAGE_STYLE = "message-own";
 const OUTSIDER_MESSAGE_STYLE = "message-other";
+const SERVER_MESSAGE_STYLE = "message-server";
 
 function renderUsers(userList) {
     userlistContainer.innerHTML = "";
@@ -37,6 +38,8 @@ function renderChat(messages) {
 
         if(name === chatUser.getUsername()){
             messageContainer.classList.add(OWN_MESSAGE_STYLE);
+        }else if(name === chatUser.getServername()){
+            messageContainer.classList.add(SERVER_MESSAGE_STYLE);
         }else{
             messageContainer.classList.add(OUTSIDER_MESSAGE_STYLE);
         }

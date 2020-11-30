@@ -15,46 +15,51 @@ const wss = new WebSocket.Server({ server });
 
 
 wss.on('connection', function (ws) {
-  ws[constants.USER_NAME] = `<i>unknown${Date.now()}</i>`;
-  ws[constants.USER_CONNECTED] = true;
+    ws[constants.USER_NAME] = `<i>unknown${Date.now()}</i>`;
+    ws[constants.USER_CONNECTED] = true;
 
-  ws.on('message', function (obj) {
-    let message = JSON.parse(obj);
+    ws.on('message', function (obj) {
+        let message = JSON.parse(obj);
 
-    if (message.type === constants.TYPE_CHAT_SERVER_MESSAGE) {
-      let saveMessage = toHTML.toHTML("" + message.data);
-      sendHelper.sendMessageAll(wss, saveMessage, ws[constants.USER_NAME], sendHelper.getTime());
+        if (message.type === constants.TYPE_CHAT_SERVER_MESSAGE) {
+            let saveMessage = toHTML.toHTML("" + message.data);
+            sendHelper.sendMessageAll(wss, saveMessage, ws[constants.USER_NAME], sendHelper.getTime());
 
-    } else if (message.type === constants.TYPE_CHAT_SERVER_NAME_CHANGE) {
-      let username = toHTML.toHTML("" + message.data);
-      if (username.length !== 0 && sendHelper.validName(wss, username)) {
-        ws[constants.USER_NAME] = username;
-        sendHelper.sendName(ws);
+        } else if (message.type === constants.TYPE_CHAT_SERVER_NAME_CHANGE) {
+            let username = toHTML.toHTML("" + message.data);
+            if (username.length !== 0 && sendHelper.validName(wss, username)) {
+                ws[constants.USER_NAME] = username;
+                sendHelper.sendName(ws);
+                sendHelper.sendOnlineUsers(wss);
+            }
+        }
+    });
+
+    ws.on('close', function () {
+        sendHelper.sendMessageAll(wss, `${ws[constants.USER_NAME]} left the chat`, "<i>server</i>", sendHelper.getTime());
         sendHelper.sendOnlineUsers(wss);
-      }
-    }
-  });
+    });
 
-  ws.on('close', function (){
-    sendHelper.sendMessageAll(wss, `${ws[constants.USER_NAME]} left the chat`, "<i>server</i>", sendHelper.getTime());
+    ws.on('error', function () {
+        sendHelper.sendMessageAll(wss, `${ws[constants.USER_NAME]} left the chat`, "<i>server</i>", sendHelper.getTime());
+        sendHelper.sendOnlineUsers(wss);
+    });
+
+    sendHelper.sendChathistory(ws);
+    sendHelper.sendName(ws);
+    sendHelper.sendMessageAll(wss, `a new member joined the chat`, "<i>server</i>", sendHelper.getTime());
     sendHelper.sendOnlineUsers(wss);
-  });
-
-  sendHelper.sendChathistory(ws);
-  sendHelper.sendName(ws);
-  sendHelper.sendMessageAll(wss, `a new member joined the chat`, "<i>server</i>", sendHelper.getTime());
-  sendHelper.sendOnlineUsers(wss);
 });
 
 
 
-app.listen(constants.appPort, function () {
-  if (fs.readFileSync(constants.chatFilePath, "utf-8").trim().length === 0) {
-    fs.writeFileSync(constants.chatFilePath, `{"type":0,"data":"Welcome to the Chat","user":"<i>server</i>","time":"${sendHelper.getTime()}"}`);
-  }
-  console.log(`serving on port ${constants.appPort}.`);
+app.listen(constants.appPort, "0.0.0.0", function () {
+    if (fs.readFileSync(constants.chatFilePath, "utf-8").trim().length === 0) {
+        fs.writeFileSync(constants.chatFilePath, `{"type":0,"data":"Welcome to the Chat","user":"<i>server</i>","time":"${sendHelper.getTime()}"}`);
+    }
+    console.log(`serving on port ${constants.appPort}.`);
 });
 
-server.listen(constants.serverPort, function () {
-  console.log(`serving on port ${constants.serverPort}`);
+server.listen(constants.serverPort, "0.0.0.0", function () {
+    console.log(`serving on port ${constants.serverPort}`);
 });

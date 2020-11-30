@@ -1,3 +1,5 @@
+const SERVER_NAME = "<i>server</i>";
+
 const CHAT_USER_MESSAGES_SYMBOL = Symbol("messages");
 const CHAT_USER_USERS_SYMBOL = Symbol("users");
 const CHAT_USER_USERNAME_SYMBOL = Symbol("username");
@@ -76,5 +78,9 @@ class ChatUser {
 
     getUsername(){
         return this.webSocket[CHAT_USER_USERNAME_SYMBOL];
+    }
+
+    getServername(){
+        return SERVER_NAME;
     }
 }
