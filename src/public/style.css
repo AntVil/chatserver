@@ -164,10 +164,12 @@
     font-family: Helvetica, sans-serif;
     font-weight: bold;
     padding: 5px;
+    margin: 0;
 }
 
 .chat-metadata-time {
     color: var(--timeColor);
+    margin: 0;
 }
 
 .chat-text {
@@ -175,6 +177,7 @@
     font-family: Helvetica, sans-serif;
     font-size: large;
     padding-left: 20px;
+    margin: 0;
 }
 
 #additional{
@@ -199,9 +202,9 @@
 
 input[type="checkbox"] {
     display: none;
-  }
+}
   
-  input[type="checkbox"] + label {
+input[type="checkbox"] + label {
     position: relative;
     display: inline-flex;
     cursor: pointer;
@@ -209,9 +212,9 @@ input[type="checkbox"] {
     /*font-size: 24px;*/
     line-height: 1.3;
     color: var(--userListcolor);
-  }
+}
   
-  input[type="checkbox"] + label:before {
+input[type="checkbox"] + label:before {
     width: 30px;
     height: 15px;
     border-radius: 15px;
@@ -220,9 +223,9 @@ input[type="checkbox"] {
     content: "";
     margin-right: 15px;
     transition: background-color 0.5s linear;
-  }
+}
   
-  input[type="checkbox"] + label:after {
+input[type="checkbox"] + label:after {
     width: 15px;
     height: 15px;
     border-radius: 15px;
@@ -233,15 +236,15 @@ input[type="checkbox"] {
     position: absolute;
     left: 2px;
     top: 2px;
-  }
+}
   
-  input[type="checkbox"]:checked + label:before {
+input[type="checkbox"]:checked + label:before {
     background-color: var(--accent-color);
-  }
+}
   
-  input[type="checkbox"]:checked + label:after {
+input[type="checkbox"]:checked + label:after {
     margin: 0 0 0 15px;
-  }
+}
 
 #chat-util button {
     color: var(--buttonColor);
