@@ -2,6 +2,19 @@ const OWN_MESSAGE_STYLE = "message-own";
 const OUTSIDER_MESSAGE_STYLE = "message-other";
 const SERVER_MESSAGE_STYLE = "message-server";
 
+const emojis = {
+    ":&rpar;": "🙂",
+    ":D": "😃",
+    ":P": "😋",
+    ":&lpar;": "🙁",
+    ";&lpar;": "😢",
+    ";&rpar;": "😉",
+    ";P": "😜",
+    "xD": "😆",
+    "&lt;3": "❤",
+    "lmao": "🤣",
+    };
+
 function renderUsers(userList) {
     userlistContainer.innerHTML = "";
     for (let i = 0; i < userList.length; i++) {
@@ -15,7 +28,7 @@ function renderChat(messages) {
     for (let i = 0; i < messages.length; i++) {
         let name = messages[i].user;
         let time = messages[i].time;
-        let message = messages[i].data;
+        let message = emojiChanger(messages[i].data);
 
         let messageContainer = document.createElement("div");
         let metaContainer = document.createElement("div");
@@ -64,4 +77,11 @@ function scrollText() {
     if (autoScrollContainer.checked) {
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
+}
+
+function emojiChanger(input){
+    Object.keys(emojis).forEach(key =>{
+        input = input.replace(key,emojis[key]);
+    })
+return input
 }
