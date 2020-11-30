@@ -19,9 +19,9 @@ function renderChat(messages) {
 
         let messageContainer = document.createElement("div");
         let metaContainer = document.createElement("div");
-        let metaNameContainer = document.createElement("span");
-        let metaTimeContainer = document.createElement("span");
-        let textContainer = document.createElement("div");
+        let metaNameContainer = document.createElement("p");
+        let metaTimeContainer = document.createElement("p");
+        let textContainer = document.createElement("p");
 
         messageContainer.classList.add('chat-message');
         metaContainer.classList.add('chat-metadata');
