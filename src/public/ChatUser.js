@@ -36,13 +36,13 @@ class ChatUser {
 
             } else if (message.type === TYPE_CHAT_USER_CHAT_HISTORY) {
                 let history = message.data.split("|");
-                for(let i=0;i<history.length;i++){
-                    if(history[i] !== ""){
+                for (let i = 0; i < history.length; i++) {
+                    if (history[i] !== "") {
                         let message = JSON.parse(history[i]);
                         this[CHAT_USER_MESSAGES_SYMBOL].push(message);
                     }
                 }
-            }else if(message.type === TYPE_CHAT_USER_NAME){
+            } else if (message.type === TYPE_CHAT_USER_NAME) {
                 this[CHAT_USER_USERNAME_SYMBOL] = message.data;
             }
         }
@@ -76,11 +76,11 @@ class ChatUser {
         this.webSocket.close();
     }
 
-    getUsername(){
+    getUsername() {
         return this.webSocket[CHAT_USER_USERNAME_SYMBOL];
     }
 
-    getServername(){
+    getServername() {
         return SERVER_NAME;
     }
 }
