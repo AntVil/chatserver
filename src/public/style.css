@@ -1,20 +1,27 @@
+/*color, border, padding, ...*/
+
+
 /*variables*/
 
 :root {
-    --backgroundBackgroundColor: #ffffff00;
-    --textColor: #000000;
-    --login-screenBackgroundcolor: #4b4b4ba4;
-    --chat-messageBordercolor: #c0c0c0;
-    --chat-boxBackgroundcolor: #ffffff00;
-    --chat-messageBackgroundcolor: #ffffff;
-    --chat-metadata-nameColor: #0099FF;
-    --chat-metadata-timeColor: #00AA00;
-    --chat-textColor: #333333;
-    --usersBordercolor: #c0c0c0;
-    --usersBackgroundcolor: #e1e1e1;
-    --messagesBackgroundcolor: #ffffff00;
-    --buttonBordercolor: #c0c0c0;
-    --buttonBackgroundcolor: #e1e1e1;
+    --backgroundColor: #FFFFFF;
+    --userColor: #136ab4;
+    --ownnameColor: #12950e;
+    --timeColor: #555353;
+    --messageColor: #000000;
+    --messageBackgroundcolor: #86bb71ba;
+    --messageBackgroundcolorother: #94c2edbd;
+    --chatBackgroundcolor: rgba(255, 255, 255, 0);
+    --containerBackgroundcolor: rgba(0, 0, 0, 0.3);
+    --containerBordercolor: rgba(0, 0, 0, 0.5);
+    --chatInputcolor: #000000;
+    --userInfocolor: #000000;
+    --ownMessagebordercolor: #86bb71b3;
+    --userMessagebordercolor: #94c2edb3;
+    --backgroundTextcolor: #aaa7a791;
+    --userListcolor: #000000;
+    --buttonBackgroundcolor: rgba(63, 167, 239, 0.8);
+    --buttonColor: #ffffff;
     --accent-color: rgba(3, 127, 209, 0.678);
 }
 
@@ -23,28 +30,30 @@
 
 @media (prefers-color-scheme: dark) {
      :root {
-        --backgroundBackgroundColor: #000000;
-        --textColor: #ffffff;
-        --login-screenBackgroundcolor: #101dcf52;
-        --chat-messageBordercolor: #06149477;
-        --chat-messageBackgroundcolor: #3f3f3f;
-        --chat-metadata-nameColor: #0084ff;
-        --chat-metadata-timeColor: #a7a7a786;
-        --chat-textColor: #919191;
-        --usersBordercolor: #c0c0c0;
-        --usersBackgroundcolor: #e1e1e1;
-        --buttonBordercolor: #c0c0c0;
-        --buttonBackgroundcolor: #000000;
+        --backgroundColor: #1d1d1d;
+        --userColor: #0099FF;
+        --ownnameColor: #1bb906;
+        --timeColor: #00AA00;
+        --messageColor: #bebebe;
+        --messageBackgroundcolor: rgba(0, 0, 0, 0.7);
+        --messageBackgroundcolorother: rgba(0, 0, 0, 0.7);
+        --chatBackgroundcolor: rgba(0, 0, 0, 0);
+        --containerBackgroundcolor: #1887a69c;
+        --containerBordercolor: rgba(0, 0, 0, 0.5);
+        --chatInputcolor: #dadada;
+        --userInfocolor: #dadada;
+        --ownMessagebordercolor: #86bb71b3;
+        --userMessageborderother: #94c2edb3;
+        --backgroundTextcolor: #aaa7a791;
+        --userListcolor: #dadada;
+        --buttonBackgroundcolor: #1887a6b9;
+        --buttonColor: #ffffff;
         --accent-color: rgba(25, 195, 238, 0.651);
     }
 }
 
-
-/*global standard values*/
-
 * {
-    font-family: Arial, Geneva, Tahoma, sans-serif;
-    color: var(--textColor);
+    font-family: Helvetica, sans-serif;
 }
 
 html,
@@ -54,232 +63,316 @@ body {
 }
 
 #background {
-    transition: background-image 2s ease-in-out;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-color: var(--backgroundBackgroundColor);
+    background-color: var(--backgroundColor);
     background-image: url(./images/Bubbles.png);
     background-size: auto;
     background-repeat: no-repeat;
+    color: var(--backgroundTextcolor);
 }
 
-
-/* Logo section, responsive */
-
-#logoHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    height: 15%;
-    min-height: 65px;
-}
-
-#logoImg {
-    display: block;
-    height: 100%;
+#logoImage {
+    height: 30%;
     width: auto;
-    padding: 5px;
 }
 
-#logoTxt {
+#logoText {
     font-family: Courier New;
     font-size: 3rem;
     font-style: italic;
     letter-spacing: 6px;
 }
 
-
-/*screens change appearance using javascript, when logged in*/
-
 #login-screen {
-    display: block;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    width: 45%;
-    transform: translate(-50%, -50%);
-    padding: 35px;
-    text-align: center;
+    border: 5px solid var(--containerBordercolor);
+    border-radius: 10px;
+    background-color: var(--containerBackgroundcolor);
     font-size: large;
 }
 
-#login-screen #about {
-    display: none;
-    width: 55%;
-    margin: auto;
-    transform: translateY(-45%);
-    border-width: 1px;
-    border-style: solid;
-    border-image: linear-gradient( to bottom, var(--textColor), rgba(0, 0, 0, 0)) 0% 10;
-    font-size: small;
-}
-
-#login-screen #login-window {
-    background-color: var(--login-screenBackgroundcolor);
-    border-radius: 10px;
-    padding: 15px;
-}
-
-#login-screen label {
-    display: none;
-}
-
-#login-screen input {
-    transition: 0.8s ease;
-    width: 15%;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    text-align: inherit;
-}
-
-#login-screen input:hover {
-    transition: 0.6s ease;
-    width: 30%;
-}
-
-#login-screen input:focus {
-    width: 30%;
-    color: var(--chat-textColor);
-}
-
 #login-screen button {
-    transition: 0.3s ease;
-    padding: 12px;
-    width: 75%;
-    color: var(--buttonBackgroundcolor);
-    background-color: var(--textColor);
+    color: var(--buttonColor);
+    background-color: var(--buttonBackgroundcolor);
     font-weight: bold;
 }
 
 #login-screen button:hover {
-    transition: 0.5s ease;
     background-color: var(--accent-color);
     cursor: pointer;
 }
 
-
-/*style for the chat screen (main)*/
-
-#chat-screen {
-    display: none;
-    justify-content: space-evenly;
-    height: 95%;
-    margin: 0;
-    /*padding: 5em;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    height: 720px;
-    width: 1280px;*/
+#userlistWrapper {
+    background-color: var(--chatBackgroundcolor);
+    color: var(--userListcolor);
 }
 
-#column1users {
-    display: block;
+#userlist {
+    color: var(--userListcolor);
+    border: 2px solid var(--containerBordercolor);
+    border-radius: 2px;
+    background-color: var(--buttonBackgroundcolor);
+    font-size: large;
+    font-weight: bold;
+    height: 30%;
+    overflow: auto;
+    margin: 5px;
 }
 
-
-/*contains list of users*/
-
-#users {
-    border: 2px solid var(--usersBordercolor);
-    background-color: var(--usersBackgroundcolor);
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px
+#userlist>div {
+    font-weight: normal;
 }
 
-.user-list {
-    padding: 2px;
-    border-radius: 5px;
-    border: 2px solid var(--usersBordercolor);
-}
-
-#column2chat {
-    height: 75%;
-    width: 45%;
+#userinfo {
+    color: var(--userInfocolor);
+    background-color: var(--chatBackgroundcolor);
+    font-size: large;
+    font-weight: bolder;
 }
 
 #chat-box {
-    position: relative;
-    overflow: auto;
-    background-color: var(--chat-boxBackgroundcolor);
-    padding: 10px;
-    margin: 10px;
-    height: 100%;
+    background-color: var(--chatBackgroundcolor);
 }
 
-#chat-input {
-    position: fixed;
-    bottom: 0;
+.message-other {
+    border: 3px solid var(--userMessagebordercolor);
+    border-radius: 20px;
+    background-color: var(--messageBackgroundcolorother);
+    color: var(--userColor);
 }
 
-
-/*textarea for messages to be send*/
-
-#message {
-    /*disable textare resizing*/
-    position: relative;
-    resize: none;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
+.message-own {
+    border: 3px solid var(--ownMessagebordercolor);
+    border-radius: 20px;
+    background-color: var(--messageBackgroundcolor);
+    color: var(--ownnameColor);
 }
 
-#messages {
-    background-color: var(--messagesBackgroundcolor);
-    border-radius: 5px;
-    padding: 10px;
+.message-server {
+    width: 40%;
+    margin: 5px auto;
+    border: 3px solid var(--containerBordercolor);
+    border-radius: 20px;
+    text-align: center;
 }
 
-.chat-message {
-    border: 2px solid var(--chat-messageBordercolor);
-    color: var(--chat-messageColor);
-    background-color: var(--chat-messageBackgroundcolor);
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
+.message-server>p {
+    font-size: small;
+}
+
+#chat-input input {
+    border: 2px solid var(--containerBordercolor);
+    border-radius: 2px;
+    background-color: var(--containerBackgroundcolor);
+    font-weight: bold;
+    text-align: center;
+    color: var(--chatInputcolor);
+    resize: both;
+}
+
+#chat-input input:focus {
+    border: 2px solid var(--containerBordercolor);
+    border-radius: 2px;
+    background-color: var(--containerBackgroundcolor);
+    font-weight: bold;
+    text-align: left;
+}
+
+#chat-input button {
+    border: 2px solid var(--containerBordercolor);
+    border-radius: 2px;
+    background-color: var(--containerBackgroundcolor);
 }
 
 .chat-metadata {
-    padding-bottom: 3px;
+    padding: 5px;
 }
 
 .chat-metadata-name {
-    color: var(--chat-metadata-nameColor);
+    font-weight: bold;
+    padding: 5px;
+    margin: 0;
 }
 
 .chat-metadata-time {
-    color: var(--chat-metadata-timeColor);
+    color: var(--timeColor);
+    margin: 0;
+    font-size: smaller;
+    border: 1px solid var(--containerBordercolor);
+    border-radius: 5px;
 }
 
 .chat-text {
-    color: var(--chat-textColor);
+    color: var(--messageColor);
+    font-size: large;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
 }
 
-button {
-    transition: 0.25s ease-in-out;
-    border: 2px solid var(--buttonBordercolor);
-    color: var(--buttonColor);
-    background-color: var(--buttonBackgroundcolor);
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px
-}
-
-button:hover {
-    background-color: var(--accent-color);
-}
-
-#column3iframes {
-    display: block;
+#additional {
+    background-color: var(--chatBackgroundcolor);
 }
 
 #about {
+    background-color: var(--backgroundColor);
+    color: var(--accent-color);
+    font-size: 3vw;
+    border: 1px solid var(--containerBordercolor);
+    border-radius: 15px;
+    transition: 0.8s ease;
+}
+
+#about:hover {
+    width: 90%;
+    height: 65%;
+}
+
+#chat-util button {
+    border: 2px solid var(--containerBordercolor);
+    border-radius: 2px;
+    background-color: var(--containerBackgroundcolor);
+    font-weight: bold;
+}
+
+#chat-util input :checked {
+    background-color: var(--buttonBackgroundcolor);
+}
+
+input[type="checkbox"] {
     display: none;
+}
+
+input[type="checkbox"]+label {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+    /*font-size: 24px;*/
+    line-height: 1.3;
+    color: var(--userListcolor);
+}
+
+input[type="checkbox"]+label:before {
+    width: 30px;
+    height: 15px;
+    border-radius: 15px;
+    border: 2px solid #ddd;
+    background-color: #EEE;
+    content: "";
+    margin-right: 15px;
+    transition: background-color 0.5s linear;
+}
+
+input[type="checkbox"]+label:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    background-color: #fff;
+    content: "";
+    transition: margin 0.1s linear;
+    box-shadow: 0px 0px 5px #aaa;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+}
+
+input[type="checkbox"]:checked+label:before {
+    background-color: var(--accent-color);
+}
+
+input[type="checkbox"]:checked+label:after {
+    margin: 0 0 0 15px;
+}
+
+#chat-util button {
+    color: var(--buttonColor);
+    background-color: var(--buttonBackgroundcolor);
+    font-weight: bold;
+    height: 25px;
+    width: 120.5px;
+}
+
+#chat-util button:hover {
+    background-color: var(--accent-color);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 689px) {
+    #additional {
+        background-color: var(--containerBackgroundcolor);
+        border: 2px solid var(--containerBordercolor);
+        border-radius: 2px;
+    }
+    #logoTextMobile {
+        display: inline;
+        font-family: Courier New;
+        font-size: 1.5rem;
+        font-style: italic;
+        letter-spacing: 6px;
+    }
+    #logoText {
+        display: none;
+    }
+    input[type="checkbox"] {
+        display: none;
+    }
+    input[type="checkbox"]+label {
+        position: relative;
+        display: inline-flex;
+        cursor: pointer;
+        line-height: 1.3;
+        color: var(--userListcolor);
+    }
+    input[type="checkbox"]+label:before {
+        width: 15px;
+        height: 7.5px;
+        border-radius: 7.5px;
+        border: 2px solid #ddd;
+        background-color: #EEE;
+        content: "";
+        margin-right: 7.5px;
+        margin-top: 5px;
+        transition: background-color 0.5s linear;
+    }
+    input[type="checkbox"]+label:after {
+        width: 7.5px;
+        height: 7.5px;
+        border-radius: 7.5px;
+        background-color: #fff;
+        content: "";
+        transition: margin 0.1s linear;
+        box-shadow: 0px 0px 5px #aaa;
+        position: absolute;
+        left: 2px;
+        top: 2px;
+        margin-top: 5px;
+    }
+    input[type="checkbox"]:checked+label:before {
+        background-color: var(--accent-color);
+    }
+    input[type="checkbox"]:checked+label:after {
+        margin: 0 0 0 7.5px;
+        margin-top: 5px;
+    }
+    #chat-util button {
+        color: var(--buttonColor);
+        background-color: var(--buttonBackgroundcolor);
+        font-weight: bold;
+        height: 25px;
+        width: 90px;
+    }
+    #chat-util button:hover {
+        background-color: var(--accent-color);
+        cursor: pointer;
+    }
+    #about {
+        font-size: large;
+    }
+}
+
+@media only screen and (min-width: 690px) {
+    #logoTextMobile {
+        display: none;
+    }
+    #logoText {
+        display: inline;
+    }
 }

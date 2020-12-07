@@ -8,66 +8,64 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="icon" type="image/png" href="images/Logo.png">
+    <link rel="stylesheet" href="layout.css">
     <link rel="stylesheet" href="style.css">
 
     <script type="text/javascript" src="ChatUser.js"></script>
+    <script type="text/javascript" src="render.js"></script>
+    <script type="text/javascript" src="userEvents.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </head>
 
 <body>
     <aside id="background">
-        <div id="logoHeader">
-            <img src="images/Logo.png" alt="message icon logo" id="logoImg">
-            <p id="logoTxt"> //Chat.server</p>
-        </div>
+        <img src="images/Logo.png" alt="message icon logo" id="logoImage">
+        <p id="logoText"> //Chat.server</p>
     </aside>
 
 
     <header id="login-screen">
-
-        <form id="login-window" onsubmit="return false">
-            <!-- Label not necessary -->
-            <label for="username">Username: </label>
-            <input id="username" name="username" placeholder="Username" />
-            <div>
-                <button onclick="join()">join</button>
-            </div>
+        <form onsubmit="return false">
+            <input id="usernameInput" name="usernameInput" placeholder="Username" />
+            <button onclick="join()">join</button>
         </form>
     </header>
 
     <main id="chat-screen">
-        <section id="column1users">
-            <div id="users"></div>
+        <section id="userlistWrapper">
+            <article id="userlist">
+
+            </article>
+
         </section>
 
 
-        <section id="column2chat">
-            <article id="chat-box">
-                <div id="messages"></div>
-            </article>
-
-
+        <section id="chat-box">
         </section>
 
         <form id="chat-input" onsubmit="return false">
-
-            <textarea id="message" type="text" placeholder="message" rows="4" cols="100"></textarea>
-            <div id="chat-util">
-                <button onclick="sendMessage()">sendMessage</button>
-                <button onclick="leave()">leave</button>
-                <label for="chat-autoScroll">autoScroll</label>
-                <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
-            </div>
+            <input id="textfield" type="text" placeholder="Type something" />
+            <button id="sendmessage" onclick="sendMessage()">&gt;</button>
         </form>
 
-        <aside id="column3iframes">
+        <section id="userinfo"></section>
 
+        <aside id="additional">
+            <p id="logoTextMobile"> //Chat.server</p>
+            <div id="chat-util">
+                <button onclick="toggleAbout()"> about </button>
+                <br>
+                <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
+                <label for="chat-autoScroll">autoScroll</label>
+                <br>
+                <button onclick="leave()">leave</button>
+            </div>
         </aside>
     </main>
 
     <!-- maybe add "about" section, currently display: none, 
         toggle maybe -->
-    <footer id="about">
+    <footer id="about" onclick="toggleAbout()">
         <p>
             Welcome to the Web-Engineering-Project Chatserver made by
             <br> Anton Böhler, Jan Broer and Alexander Dietrich.

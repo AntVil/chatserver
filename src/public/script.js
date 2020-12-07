@@ -1,154 +1,66 @@
-const OWN_MESSAGE_STYLE = "o";
-const OUTSIDER_MESSAGE_STYLE = "u";
+let chatUser;
 
-const emojis = {
-":&rpar;": "🙂",
-":D": "😃",
-":P": "😋",
-":&lpar;": "🙁",
-";&lpar;": "😢",
-";&rpar;": "😉",
-";P": "😜",
-"xD": "😆",
-"&lt;3": "❤",
-"lmao": "🤣",
-};
-let user;
+let loginScreenContainer;
+let chatScreenContainer;
 
-let loginScreenElement;
-let chatScreenElement;
-let usersElement;
-let messagesElement;
-let chatBoxElement;
-let chatAutoScrollCheckbox;
-let backgroundElement; //background animation in chat-screen
+let userlistContainer;
+let chatContainer;
+let userInfoContainer;
+let usernameContainer;
+
+let autoScrollContainer;
+let aboutContainer;
+let textfieldContainer;
 
 let frame;
 
-window.onload = function () {
-    user = null;
 
-    loginScreenElement = document.getElementById("login-screen");
-    chatScreenElement = document.getElementById("chat-screen");
-    usersElement = document.getElementById("users");
-    messagesElement = document.getElementById("messages");
-    chatBoxElement = document.getElementById("chat-box");
-    chatAutoScrollCheckbox = document.getElementById("chat-autoScroll");
-    backgroundElement = document.getElementById("background");
-    aboutElement = document.getElementById("about");
-    usersElement = document.getElementById("users");
+window.onload = function() {
+    chatUser = null;
+
+    setupContainers();
+
+    setupUI();
 
     frame = 0;
     loop();
 }
 
 function loop() {
-    //get chat every 30 frames = 1/2sec
-    if (user !== null && frame % 30 === 0) {
-        let messages = user.getNewMessages();
-        renderChat(messages);
+    if (chatUser !== null) {
+        if (frame % 30 === 0) {
+            let messages = chatUser.getNewMessages();
+            if (messages.length !== 0) {
+                renderChat(messages);
+            }
 
-        let userList = user.getUsers();
-        renderUsers(userList);
+            let userList = chatUser.getUpdatedUsers();
+            if (userList.length !== 0) {
+                renderUsers(userList);
+            }
+        }
+        scrollText();
+        renderUserinfo();
     }
-
-    scrollText();
 
     frame++;
     requestAnimationFrame(loop);
 }
-function renderUsers(userList) {
-    usersElement.innerHTML = "";
-    for (let i = 0; i < userList.length; i++) {
-        let userElement = document.createElement("div");
-        userElement.classList.add("user-list");
-        userElement.innerHTML = userList[i];
-        usersElement.appendChild(userElement);
-    }
+
+
+
+function setupContainers() {
+    loginScreenContainer = document.getElementById("login-screen");
+    chatScreenContainer = document.getElementById("chat-screen");
+
+    userlistContainer = document.getElementById("userlist");
+    chatContainer = document.getElementById("chat-box");
+    usernameContainer = document.getElementById("usernameInput");
+    userInfoContainer = document.getElementById("userinfo");
+
+    autoScrollContainer = document.getElementById("chat-autoScroll");
+    aboutContainer = document.getElementById("about");
+    textfieldContainer = document.getElementById("textfield");
+
+    setupScrollEvent();
 }
-function renderChat(messages) {
-    for (let i = 0; i < messages.length; i++) {
-        let name = messages[i].user;
-        let time = messages[i].time;
-        let message = emojiChanger(messages[i].data);
-
-        let messageElement = document.createElement("div");
-        let metaElement = document.createElement("div");
-        let metaNameElement = document.createElement("span");
-        let metaTimeElement = document.createElement("span");
-        let textElement = document.createElement("div");
-
-        messageElement.classList.add('chat-message');
-        metaElement.classList.add('chat-metadata');
-        metaNameElement.classList.add('chat-metadata-name');
-        metaTimeElement.classList.add('chat-metadata-time');
-        textElement.classList.add('chat-text');
-
-        messageElement.append(metaElement, textElement);
-        metaElement.append(metaNameElement, metaTimeElement);
-
-        metaNameElement.innerHTML = name;
-        metaTimeElement.innerHTML = time;
-        textElement.innerHTML = message;
-
-        if(name === user.getUsername()){
-            messageElement.classList.add(OWN_MESSAGE_STYLE);
-        }else{
-            messageElement.classList.add(OUTSIDER_MESSAGE_STYLE);
-        }
-
-        messagesElement.appendChild(messageElement);
-    }
-}
-
-function scrollText() {
-    /* Tried to make autoscroll only if there is no manual scrolling happening, no sucess yet.
-
-    let lastScroll = 0;
-    let down = false;
-    chatBoxElement.on("scroll", function(e) {
-        let scroll = this.scrollHeight;
-        down = scroll > lastScroll;
-        lastScroll = scroll;
-    });
-    */
-    if (chatAutoScrollCheckbox.checked /*&& down*/) {
-        chatBoxElement.scrollTop = chatBoxElement.scrollHeight;
-    }
-}
-
-//does not work currently, background image jumps without 2s transition
-function backgroundAnimation() {
-    backgroundElement.style.transition = "background-image 2s";
-    backgroundElement.style.backgroundSize = "15%";
-}
-
-/* FUNCTIONS CALLED BY USER (BUTTON) */
-function join() {
-    let username = document.getElementById("username").value;
-    user = new ChatUser(username, "ws://localhost:2001/");
-
-    loginScreenElement.style.display = "none";
-    chatScreenElement.style.display = "flex";
-
-    //backgroundAnimation();
-}
-
-function sendMessage() {
-    let message = document.getElementById("message").value;
-    user.sendMessage(message);
-}
-
-function leave() {
-    user.leave();
-    user = null;
-
-    loginScreenElement.style.display = "flex";
-    chatScreenElement.style.display = "none";
-}
-function emojiChanger(input){
-        Object.keys(emojis).forEach(key =>{
-            input = input.replace(key,emojis[key]);
-        })
-    return input
-    }

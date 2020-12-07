@@ -1,0 +1,220 @@
+/*position, transfrom, margin, ...*/
+
+body {
+    margin: 0;
+}
+
+#background {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#login-screen {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 10px;
+}
+
+#login-screen input {
+    transition: 0.8s ease;
+    width: 50%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    text-align: inherit;
+}
+
+#login-screen input:focus {
+    transition: 0.6s ease;
+    width: 80%;
+}
+
+#login-screen input:hover {
+    transition: 0.6s ease;
+    width: 80%;
+}
+
+#login-screen button {
+    transition: 0.3s ease;
+    padding: 12px;
+    width: 75%;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+#login-screen button:hover {
+    transition: 0.5s ease;
+}
+
+
+/*mobile*/
+
+@media only screen and (max-width: 689px) {
+    main {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 0px auto 0px;
+        grid-template-rows: 75px 50px auto 50px;
+    }
+    #userlistWrapper {
+        grid-column-start: 1;
+        grid-column-end: span 1;
+        grid-row-start: 2;
+        grid-row-end: span 3;
+        text-align: center;
+        overflow: auto;
+    }
+    #chat-box {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 2;
+        grid-row-end: span 2;
+        overflow: auto;
+    }
+    #chat-input {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 4;
+        grid-row-end: span 1;
+        display: grid;
+        grid-template-columns: auto 30px;
+        grid-template-rows: auto;
+    }
+    #userinfo {
+        grid-column-start: 3;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+    }
+    #additional {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+        overflow: auto;
+    }
+    #userlist {
+        position: relative;
+        top: 60%;
+        transform: translate(0, -50%);
+    }
+    .chat-message {
+        width: 85%;
+        margin: 5px;
+    }
+    .message-other {
+        color: var(--userColor);
+        margin-left: 0;
+        margin-right: auto;
+    }
+    .message-own {
+        color: var(--ownColor);
+        margin-left: auto;
+        margin-right: 0;
+    }
+    #chat-util {
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+}
+
+
+/*pc*/
+
+@media only screen and (min-width: 690px) {
+    main {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 250px auto 200px;
+        grid-template-rows: 50px auto 50px;
+        gap: 5px;
+    }
+    #userlistWrapper {
+        grid-column-start: 1;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 3;
+        text-align: center;
+        overflow: auto;
+    }
+    #chat-box {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 2;
+        overflow: auto;
+    }
+    #chat-input {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 3;
+        grid-row-end: span 1;
+        display: grid;
+        grid-template-columns: auto 30px;
+        grid-template-rows: auto;
+    }
+    #userinfo {
+        grid-column-start: 3;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+    }
+    #additional {
+        grid-column-start: 3;
+        grid-column-end: span 1;
+        grid-row-start: 2;
+        grid-row-end: span 2;
+        overflow: auto;
+    }
+    #userlist {
+        position: relative;
+        top: 60%;
+        transform: translate(0, -50%);
+    }
+    .chat-message {
+        width: 85%;
+        margin: 5px;
+    }
+    .message-other {
+        color: var(--userColor);
+        margin-left: 0;
+        margin-right: auto;
+    }
+    .message-own {
+        color: var(--ownColor);
+        margin-left: auto;
+        margin-right: 0;
+    }
+    #chat-util {
+        position: absolute;
+        bottom: 0;
+        right: 2%;
+    }
+}
+
+#about {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 60%;
+    text-align: center
+}
