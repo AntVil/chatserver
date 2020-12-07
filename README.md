@@ -11,6 +11,7 @@
 - messages with meta-data (time/user)
 - intuitive UI
 - user management
+- generated username (if none given)
 - emojis (xD -> 😆)
 - empty messages are not sent
 - about section
