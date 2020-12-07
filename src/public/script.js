@@ -48,6 +48,7 @@ function loop() {
 }
 
 
+
 function setupContainers() {
     loginScreenContainer = document.getElementById("login-screen");
     chatScreenContainer = document.getElementById("chat-screen");
