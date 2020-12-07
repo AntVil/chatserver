@@ -9,12 +9,13 @@ let userInfoContainer;
 let usernameContainer;
 
 let autoScrollContainer;
+let aboutContainer;
 let textfieldContainer;
 
 let frame;
 
 
-window.onload = function () {
+window.onload = function() {
     chatUser = null;
 
     setupContainers();
@@ -55,8 +56,9 @@ function setupContainers() {
     chatContainer = document.getElementById("chat-box");
     usernameContainer = document.getElementById("usernameInput");
     userInfoContainer = document.getElementById("userinfo");
-    
+
     autoScrollContainer = document.getElementById("chat-autoScroll");
+    aboutContainer = document.getElementById("about");
     textfieldContainer = document.getElementById("textfield");
 
     setupScrollEvent();
