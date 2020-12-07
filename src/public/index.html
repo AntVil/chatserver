@@ -53,6 +53,8 @@
         <aside id="additional">
             <p id="logoTextMobile"> //Chat.server</p>
             <div id="chat-util">
+                <button onclick="toggleAbout()"> about </button>
+                <br>
                 <input id="chat-autoScroll" name="chat-autoScroll" type="checkbox" checked>
                 <label for="chat-autoScroll">autoScroll</label>
                 <br>
@@ -63,7 +65,7 @@
 
     <!-- maybe add "about" section, currently display: none, 
         toggle maybe -->
-    <footer id="about">
+    <footer id="about" onclick="toggleAbout()">
         <p>
             Welcome to the Web-Engineering-Project Chatserver made by
             <br> Anton Böhler, Jan Broer and Alexander Dietrich.

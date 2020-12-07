@@ -65,7 +65,7 @@ body {
         height: 100%;
         display: grid;
         grid-template-columns: 0px auto 0px;
-        grid-template-rows: 50px 50px auto 50px;
+        grid-template-rows: 75px 50px auto 50px;
     }
     #userlistWrapper {
         grid-column-start: 1;
@@ -129,9 +129,6 @@ body {
         right: 10px;
     }
 }
-
-
-
 
 
 /*pc*/
@@ -211,7 +208,13 @@ body {
     }
 }
 
-
 #about {
     display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 60%;
+    text-align: center
 }

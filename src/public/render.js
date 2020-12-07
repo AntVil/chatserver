@@ -1,6 +1,8 @@
 const OWN_MESSAGE_STYLE = "message-own";
 const OUTSIDER_MESSAGE_STYLE = "message-other";
 const SERVER_MESSAGE_STYLE = "message-server";
+const DISPLAY_FALSE = "none";
+const DISPLAY_TRUE = "block";
 
 const emojis = {
     ":&rpar;": "🙂",
@@ -85,4 +87,12 @@ function replaceEmojis(input) {
         input = input.replace(key, emojis[key]);
     })
     return input
+}
+
+function toggleAbout() {
+    if (aboutContainer.style.display === DISPLAY_TRUE) {
+        aboutContainer.style.display = DISPLAY_FALSE;
+    } else {
+        aboutContainer.style.display = DISPLAY_TRUE;
+    }
 }
