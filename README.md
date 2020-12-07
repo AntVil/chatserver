@@ -3,10 +3,10 @@
 
 ##### FEATURES:
 - working chat
-- chathistory gets stored
+- chat history gets stored
 - only new messages get sent
 - responsive layout
-- light/darkmode
+- light/dark mode
 - server messages (sb. joined/left)
 - messages with meta-data (time/user)
 - intuitive UI
@@ -15,7 +15,7 @@
 - emojis (xD -> 😆)
 - empty messages are not sent
 - about section
-- organised/expandable code
+- organized/expandable code
 - uses html elements where needed (form, ...)
 - leave chat (time-out works too)
 
@@ -30,3 +30,4 @@
 
 ###### Check dev/diagrams to see the general structure (perhaps outdated)
 ###### (this document uses https://guides.github.com/features/mastering-markdown/)
+###### Git Repo: https://github.com/htcryme/chatserver

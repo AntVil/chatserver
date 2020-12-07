@@ -1,4 +1,4 @@
-#presentation infp: 
+#presentation info: 
 -10-15min
 -20% of grade
 -chat (frontend + backend)
@@ -9,6 +9,6 @@
     -> express takes care of webpage content
 
 #problems:
--storing messages -> to text-document with seperation characters (\n)
+-storing messages -> to text-document with separation characters (\n)
 -special html characters in messages -> replacing with HTML encodings
--too many messages make chat less readable -> autoScroll
+-too many messages make chat less readable -> auto scroll

@@ -6,7 +6,7 @@
 #username
 #show who is online
 #message: text, username, date
-#message iterception (front- & backend)
+#message interception (backend)
 #save to text-document
 #log out
 #on tab close -> unreliable
@@ -16,5 +16,5 @@
 
 
 Additions/fixes: 
-    - Autoscroll: disable automatically when manual scrolling 
+    - Auto scroll: disable automatically when manual scrolling 
     - login by pressing enter after name input
